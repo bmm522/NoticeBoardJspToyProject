@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%
-//tring token = (String)request.getAttribute("token");
 
-%>   
  
 <!DOCTYPE html>
 <html>
@@ -19,28 +16,20 @@
   </section>
   
   <section>
-    <form name="login" action="makeidlogic">
+    <form method="post" action="NoticeBoardMakeMemberController">
       아이디확인<br>
-      	<form action="idcheck">
+      	
 	      <input type="text" name="user_ID" placeholder="아이디 입력" >
-	      <input type="submit" name="user_IDcheck" value="아이디 중복체크">
-
-	     	
-	   
+	      
+	      <br>
+	      비밀번호<br> 
+	      <input type="password" name="user_PW"><br>
 	     
-	     </form>
-      <br>
-      비밀번호<br> 
-      <input type="password" name="user_PW1"><br>
-      비밀번호 재확인<br> 
-      <input type="password" name="user_PW2">
-      <input type="button" name="user_PWcheck" value="비밀번호 재확인">
       <br><br>
-      이름<br>  <input type="text" name="user_name" value=""> <br>
-    
-    
-    
-    	<input type = "submit" name = "makebutton" value ="생성">
+     	이름<br>  <input type="text" name="user_Name" value=""> <br>
+    	핸드폰번호<br>  <input type="text" name="user_Phonenum" value=""> <br>
+    	이메일<br>  <input type="text" name="user_Email" value=""> <br>
+    		<input type = "submit" value ="생성">
     
     </form>
   </section>
