@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import NoticeBoardProject.service.NoticeBoardDAOImpl;
-import NoticeBoardProject.service.NoticeBoardDAOService;
+import NoticeBoardProject.DAO.NoticeBoardDAOImpl;
+import NoticeBoardProject.DAO.NoticeBoardDAOService;
 
 @WebServlet("/NoticeBoardController")
 public class NoticeBoardController extends HttpServlet{
@@ -29,7 +29,7 @@ public class NoticeBoardController extends HttpServlet{
 			throws ServletException, IOException {
 		
 		
-		userId = request.getParameter("User_Id");
+		userId = request.getParameter("User_ID");
 		userPwd = request.getParameter("User_Pwd");
 		
 		NoticeBoardDAOService noticeBoardDaoImpl = new NoticeBoardDAOImpl();
@@ -44,11 +44,7 @@ public class NoticeBoardController extends HttpServlet{
 			
 		} else {
 			response.sendRedirect("/NoticeBoardProject/loginresult.jsp");
-		}
-		
-		
-		
-		
+		}	
 		
 		
 	}

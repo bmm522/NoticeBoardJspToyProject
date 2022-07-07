@@ -1,4 +1,4 @@
-package NoticeBoardProject.service;
+package NoticeBoardProject.DAO;
 
 public interface NoticeBoardDAOService {
 	String url = "jdbc:oracle:thin:@localhost:1521/xe";
