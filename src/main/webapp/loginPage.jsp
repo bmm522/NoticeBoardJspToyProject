@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  
- <%
-String i = "실패";
-i = (String)request.getAttribute("i");
-if(i == null || i.length() ==0){
-	i = "실패";
-} 
-//else if(i.equals("성공")){
-	//i = "성공";
-//}
- %>   
 
 <!DOCTYPE html>
 <html>
@@ -40,20 +30,10 @@ if(i == null || i.length() ==0){
     <div class = "login">
         <h1 class = "title">로그인 페이지</h1>
         <hr>
-        	<form action="LoginAction">
-        		<p class = "id">ID: <input type="text" name = "checkid" /></p>
-        		<p class = "pw">PW: <input type="password" name = "ps"/></p>
+        	<form method= "post" action="NoticeBoardController">
+        		<p class = "id">ID: <input type="text" name = "User_Id" /></p>
+        		<p class = "pw">PW: <input type="password" name = "User_Pwd"/></p>
         		<p class = "button"><input type="submit" value="로그인하기"></p>
-        		
-        		<div>
-	        		<p>
-	        		<%if(i.equals("성공")){%>
-	        			<%response.sendRedirect("loginresult.jsp");%>
-	        			<%} %>
-	        			
-	        		
-	        		</p>
-        		</div>
         	</form>
         	
         	<form action="makeidpagemovelogic">
