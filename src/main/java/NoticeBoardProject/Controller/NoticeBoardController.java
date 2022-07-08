@@ -30,7 +30,7 @@ public class NoticeBoardController extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		HttpSession session = null;
+		//HttpSession session = null;
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -47,7 +47,7 @@ public class NoticeBoardController extends HttpServlet{
 		
 		
 		if (check ==1) { 
-			session.setAttribute("userId", userId);
+			//session.setAttribute("userId", userId);
 			out.println("<script>");
 			out.println("location.href='main.jsp'");
 			out.println("</script>");

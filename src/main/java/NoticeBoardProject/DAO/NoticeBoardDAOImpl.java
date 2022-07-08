@@ -11,43 +11,74 @@ import NoticeBoardProject.entity.LoginEntity;
 public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 	
 	String url = "jdbc:oracle:thin:@localhost:1521/xe";
-	Connection con; 
-	PreparedStatement pst; 
-	ResultSet rs;
-	NoticeBoardDAOClose jdbcClose;
-	
-	public NoticeBoardDAOImpl() {
-		con=null; 
-		pst =null; 
-		rs = null;
-		jdbcClose = new NoticeBoardDAOClose();
+		
+	public Connection SetConnectionDatabaseNoticeBoardDAOImpl() {
+		Connection con = null;
+//		PreparedStatement pst; 
+//		ResultSet rs;
+//		NoticeBoardDAOClose jdbcClose;
+		
+//		con=null; 
+//		pst =null; 
+//		rs = null;
+//		jdbcClose = new NoticeBoardDAOClose();
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con=DriverManager.getConnection(url, "c##bmm522", "1234");
-			
-		} catch(ClassNotFoundException e) {
-			
+			con =DriverManager.getConnection(url, "c##bmm522", "1234");	
+		}
+		catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		} 
 		catch(SQLException e) {
-			
+			e.printStackTrace();
+		} catch(NullPointerException e) {
 			e.printStackTrace();
 		}
+		return con;
 	}
+	
+	
+	
+	
+	
+	public ResultSet getLoginCheckResultSet(String userid) {
+		String sql = "SELECT USERPWD FROM BOARDMEMBER WHERE USERID=?";
+		//String userid = "";
+		Connection con = SetConnectionDatabaseNoticeBoardDAOImpl();
+		
+		try {
+		pst = con.prepareStatement(sql);
+		
+		pst.setString(1, userid);
+		rs = pst.executeQuery();
+		//userid = (String)rs;
+		} 
+		catch(SQLException e) {
+			e.printStackTrace();
+		} 
+		return rs;
+	}
+	
+	
+	
 	
 	
 	
 	public int GetTokenOfLoginCheck(String userid, String userpwd) {
 		
-		String sql = "SELECT USERPWD FROM BOARDMEMBER WHERE USERID=?";
+//		String sql = "SELECT USERPWD FROM BOARDMEMBER WHERE USERID=?";
 		
-		try {
+		
+		try { 
+			ResultSet rs = getLoginCheckResultSet(userid);
+//			pst = con.prepareStatement(sql);
+//			
+//			pst.setString(1, userid);
+//			rs = pst.executeQuery();
+//			
 			
-			pst = con.prepareStatement(sql);
 			
-			pst.setString(1, userid);
-			rs = pst.executeQuery();
 			
 			if(rs.next()) { //검색결과가 있으면 데이터를 돌것이다.
 				
@@ -71,6 +102,15 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 		return -2; //데이터 오류일시에는 오류토큰 -2출력
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@Override
