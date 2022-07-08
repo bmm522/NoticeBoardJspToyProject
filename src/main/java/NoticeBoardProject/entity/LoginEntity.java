@@ -3,10 +3,11 @@ package NoticeBoardProject.entity;
 import java.sql.Date;
 
 public class LoginEntity {
-	private int checkNum;
+
 	private String userId;
 	private String userPwd;
-	private int phoneNum;
+	private String userName;
+	private String phoneNum;
 	private String email;
 	private Date regDate;
 	
@@ -14,22 +15,38 @@ public class LoginEntity {
 		
 	}
 	
-	public LoginEntity(int checkNum, String userId, String userPwd, int phoneNum, String email, Date regDate) {
-		super();
-		this.checkNum = checkNum;
+	public LoginEntity(String userId, String userPwd, String userName, String phoneNum, String email) {
+		
 		this.userId = userId;
 		this.userPwd = userPwd;
+		this.userName = userName;
+		this.phoneNum = phoneNum;
+		this.email = email;
+		
+	
+	}
+	
+	
+	public LoginEntity(String userId, String userPwd, String userName, String phoneNum, String email, Date regDate) {
+		
+		
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
 		this.phoneNum = phoneNum;
 		this.email = email;
 		this.regDate = regDate;
 	}
 	
-	public int getCheckNum() {
-		return checkNum;
+	
+	public String getUserName() {
+		return userName;
 	}
-	public void setCheckNum(int checkNum) {
-		this.checkNum = checkNum;
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
+
 	public String getUserId() {
 		return userId;
 	}
@@ -42,10 +59,10 @@ public class LoginEntity {
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
 	}
-	public int getPhoneNum() {
+	public String getPhoneNum() {
 		return phoneNum;
 	}
-	public void setPhoneNum(int phoneNum) {
+	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
 	public String getEmail() {

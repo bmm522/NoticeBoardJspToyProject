@@ -1,11 +1,12 @@
 package NoticeBoardProject.DAO;
 
-import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import NoticeBoardProject.entity.LoginEntity;
 
 public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 	
@@ -34,6 +35,8 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	public int GetTokenOfLoginCheck(String userid, String userpwd) {
 		
@@ -67,6 +70,54 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 			
 		return -2; //데이터 오류일시에는 오류토큰 -2출력
 	}
+
+	
+	
+	@Override
+	public int GetTokenOfMakeMember(String newUserId, String newUserPw, String newUserName, String newUserPhonenum,
+			String newUserEmail) {
+		String sql = "INSERT INTO BOARDMEMBER(USERID, USERPWD, USERNAME, PHONENUM, EMAIL) VALUES (?, ?, ?, ?, ?)";
+		LoginEntity loginEntity = new LoginEntity
+				(newUserId, newUserPw, newUserName, newUserPhonenum,newUserEmail);
+		
+		try {
+			
+			pst = con.prepareStatement(sql);
+			
+			pst.setString(1, loginEntity.getUserId());
+			pst.setString(2, loginEntity.getUserPwd());
+			pst.setString(3, loginEntity.getUserName());
+			pst.setString(4, loginEntity.getPhoneNum());
+			pst.setString(5, loginEntity.getEmail());
+			
+			try {
+				return pst.executeUpdate(); //회원가입 성공토큰 1
+				
+			} catch(SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+			
+			
+		}
+			catch(Exception e) {
+			
+			e.printStackTrace();
+			
+			
+		}	finally {
+			 
+			
+			jdbcClose.JdbcClose(con, pst);
+			
+		
+		}
+		
+		return -1;
+			
+	}
+	
+	
 	
 	
 }

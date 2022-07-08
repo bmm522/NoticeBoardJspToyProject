@@ -3,19 +3,19 @@ package NoticeBoardProject.Controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import NoticeBoardProject.DAO.NoticeBoardDAOImpl;
 import NoticeBoardProject.DAO.NoticeBoardDAOService;
 
 @WebServlet("/NoticeBoardLoginController")
 public class NoticeBoardController extends HttpServlet{
-	int check;
+	private int check;
 	private String userId;
 	private String userPwd;
 	public NoticeBoardController() {
@@ -30,6 +30,8 @@ public class NoticeBoardController extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
+		HttpSession session = null;
+		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		//인코딩 설정
@@ -38,17 +40,14 @@ public class NoticeBoardController extends HttpServlet{
 		userPwd = request.getParameter("User_Pwd");
 		
 		NoticeBoardDAOService noticeBoardDaoImpl = new NoticeBoardDAOImpl();
-		
-		check = noticeBoardDaoImpl.GetTokenOfLoginCheck(userId, userPwd);
-		
-		request.setAttribute("check", check);
-		
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("loginresult.jsp");
-//		dispatcher.forward(request, response);
-		
 		PrintWriter out=response.getWriter();
 		
+		check = noticeBoardDaoImpl.GetTokenOfLoginCheck(userId, userPwd);
+				
+		
+		
 		if (check ==1) { 
+			session.setAttribute("userId", userId);
 			out.println("<script>");
 			out.println("location.href='main.jsp'");
 			out.println("</script>");
