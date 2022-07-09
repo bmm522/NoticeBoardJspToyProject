@@ -11,18 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import NoticeBoardProject.DAO.NoticeBoardDAOImpl;
 import NoticeBoardProject.DAO.NoticeBoardDAOService;
-import NoticeBoardProject.DAO.Token.LoginToken;
+import NoticeBoardProject.DAO.Token.Token;
+
+
 
 @WebServlet("/NoticeBoardLoginController")
 public class NoticeBoardController extends HttpServlet{
 	
 	
 	
-	private int check;
+	
 	private String userId;
 	private String userPwd;
 	public NoticeBoardController() {
-		check = 0;
+		
 		userId = "";
 		userPwd = "";
 		
@@ -45,25 +47,25 @@ public class NoticeBoardController extends HttpServlet{
 		NoticeBoardDAOService noticeBoardDaoImpl = new NoticeBoardDAOImpl();
 		PrintWriter out=response.getWriter();
 		
-		check = noticeBoardDaoImpl.GetTokenOfLoginCheck(userId, userPwd);
+		Token check = noticeBoardDaoImpl.GetTokenOfLoginCheck(userId, userPwd);
 			
-		LoginToken loginToken = new LoginToken(check);
+
 		
 		
-		switch(loginToken.getTokenName()) {
-			case "LOGINSUCCESS":
+		switch(check) {
+			case LOGINSUCCESS:
 				//session.setAttribute("userId", userId);
 				out.println("<script>");
 				out.println("location.href='main.jsp'");
 				out.println("</script>");
 				break;
-			case "LOGINIDPWDNOTMATCH":
+			case LOGINIDPWDNOTMATCH:
 				out.println("<script>");
 				out.println("alert('비밀번호가 틀립니다')");
 				out.println("location.href='loginPage.jsp'");
 				out.println("</script>");
 				break;
-			case "LOGINFAIL":
+			case LOGINFAIL:
 				out.println("<script>");
 				out.println("alert('아이디가 없습니다')");
 				out.println("location.href='loginPage.jsp'");
@@ -84,6 +86,8 @@ public class NoticeBoardController extends HttpServlet{
 		
 		
 	}
+
+
 
 
 
