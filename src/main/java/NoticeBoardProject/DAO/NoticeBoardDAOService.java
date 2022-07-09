@@ -1,5 +1,7 @@
 package NoticeBoardProject.DAO;
 
+import java.sql.ResultSet;
+
 import NoticeBoardProject.DAO.Token.Token;
 
 public interface NoticeBoardDAOService {

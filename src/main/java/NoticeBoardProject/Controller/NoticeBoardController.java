@@ -59,15 +59,9 @@ public class NoticeBoardController extends HttpServlet{
 				out.println("location.href='main.jsp'");
 				out.println("</script>");
 				break;
-			case LOGINIDPWDNOTMATCH:
-				out.println("<script>");
-				out.println("alert('비밀번호가 틀립니다')");
-				out.println("location.href='loginPage.jsp'");
-				out.println("</script>");
-				break;
 			case LOGINFAIL:
 				out.println("<script>");
-				out.println("alert('아이디가 없습니다')");
+				out.println("alert('아이디 또는 비밀번호가 없습니다')");
 				out.println("location.href='loginPage.jsp'");
 				out.println("</script>");
 				break;
@@ -76,7 +70,6 @@ public class NoticeBoardController extends HttpServlet{
 				out.println("alert('오류')");
 				out.println("location.href='loginPage.jsp'");
 				out.println("</script>");
-			
 				break;
 		
 		

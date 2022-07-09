@@ -71,43 +71,39 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 	
 	public Token GetTokenOfLoginCheck(String userid, String userpwd) {
 		
-		String sql = "SELECT USERPWD FROM BOARDMEMBER WHERE USERID=?";
-		
+		String sql = "SELECT USERPWD FROM BOARDMEMBER WHERE USERID=? AND USERPWD=?";
 		
 		try { 
-			
 			pst = con.prepareStatement(sql);
-			
 			pst.setString(1, userid);
+			pst.setString(2, userpwd);
 			rs = pst.executeQuery();
-		
 			
-			
-			
-			if(rs.next()) { //검색결과가 있으면 데이터를 돌것이다.
-				
-				if(rs.getString("USERPWD").equals(userpwd)) {//해당 아이디의 패스워드와 입력 패스워드가 같은지 비교
-					return Token.LOGINSUCCESS; // 두가지의 조건을 만족하면 성공토큰 1을 출력
-				} else {
-					return Token.LOGINIDPWDNOTMATCH; // 비밀번호 틀렸을때
-				}
-			} 
-			return Token.LOGINFAIL; //해당하지 않으면 실패토큰 -1 출력
-		}
-		 catch(Exception e) {
+		}catch(Exception e) {
 				e.printStackTrace();
-		}
-		finally {
+		}	
+		return GetTokenOfLoginCheckIfLogic(rs);
+	}
+	
+	
+	public Token GetTokenOfLoginCheckIfLogic(ResultSet rs) {
+		
+		try {
+			
+			if(rs.next()) 
+				return Token.LOGINSUCCESS;
+		
+			return Token.LOGINFAIL;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
 			 jdbcClose.JdbcClose(con, pst, rs); //강제로 예외발생시켜서 닫게함
 		}
-			
-		return Token.LOGINERROR; //데이터 오류일시에는 오류토큰 -2출력
+		
+		return Token.LOGINERROR;
 	}
-
-	
-	
-	
-	
 	
 	
 	
@@ -158,8 +154,24 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 		return -1;
 			
 	}
+}	
 	
 	
-	
-	
-}
+//	try{
+//		if(rs.next()) { //검색결과가 있으면 데이터를 돌것이다.
+//			if(rs.getString("USERPWD").equals(userpwd)) //해당 아이디의 패스워드와 입력 패스워드가 같은지 비교
+//				return Token.LOGINSUCCESS; // 두가지의 조건을 만족하면 성공토큰 1을 출력
+//			
+//			 else 
+//				return Token.LOGINIDPWDNOTMATCH; // 비밀번호 틀렸을때	
+//		
+//	}
+//		
+//	return Token.LOGINFAIL; //해당하지 않으면 실패토큰 -1 출력			
+//} catch(Exception e) {
+//	e.printStackTrace();
+//}
+//
+//return Token.LOGINERROR;
+//}
+//}
