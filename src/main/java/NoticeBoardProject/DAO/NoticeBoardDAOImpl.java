@@ -6,22 +6,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+
 import NoticeBoardProject.entity.LoginEntity;
+
+
+	
+
 
 public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 	
 	String url = "jdbc:oracle:thin:@localhost:1521/xe";
 		
-	public Connection SetConnectionDatabaseNoticeBoardDAOImpl() {
-		Connection con = null;
-//		PreparedStatement pst; 
-//		ResultSet rs;
-//		NoticeBoardDAOClose jdbcClose;
-		
-//		con=null; 
-//		pst =null; 
-//		rs = null;
-//		jdbcClose = new NoticeBoardDAOClose();
+	Connection con;
+	PreparedStatement pst; 
+	ResultSet rs;
+	NoticeBoardDAOClose jdbcClose;
+	
+	
+	public NoticeBoardDAOImpl() {
+		con=null; 
+		pst =null; 
+		rs = null;
+		jdbcClose = new NoticeBoardDAOClose();
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -32,34 +39,32 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 		} 
 		catch(SQLException e) {
 			e.printStackTrace();
-		} catch(NullPointerException e) {
-			e.printStackTrace();
 		}
-		return con;
+		
 	}
 	
 	
 	
 	
 	
-	public ResultSet getLoginCheckResultSet(String userid) {
-		String sql = "SELECT USERPWD FROM BOARDMEMBER WHERE USERID=?";
-		//String userid = "";
-		Connection con = SetConnectionDatabaseNoticeBoardDAOImpl();
-		
-		try {
-		pst = con.prepareStatement(sql);
-		
-		pst.setString(1, userid);
-		rs = pst.executeQuery();
-		//userid = (String)rs;
-		} 
-		catch(SQLException e) {
-			e.printStackTrace();
-		} 
-		return rs;
-	}
-	
+//	public ResultSet getLoginCheckResultSet(String userid) {
+//		String sql = "SELECT USERPWD FROM BOARDMEMBER WHERE USERID=?";
+//		//String userid = "";
+//		
+//		
+//		try {
+//		pst = con.prepareStatement(sql);
+//		
+//		pst.setString(1, userid);
+//		rs = pst.executeQuery();
+//		//userid = (String)rs;
+//		} 
+//		catch(SQLException e) {
+//			e.printStackTrace();
+//		} 
+//		return rs;
+//	}
+//	
 	
 	
 	
@@ -67,16 +72,16 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 	
 	public int GetTokenOfLoginCheck(String userid, String userpwd) {
 		
-//		String sql = "SELECT USERPWD FROM BOARDMEMBER WHERE USERID=?";
+		String sql = "SELECT USERPWD FROM BOARDMEMBER WHERE USERID=?";
 		
 		
 		try { 
-			ResultSet rs = getLoginCheckResultSet(userid);
-//			pst = con.prepareStatement(sql);
-//			
-//			pst.setString(1, userid);
-//			rs = pst.executeQuery();
-//			
+			
+			pst = con.prepareStatement(sql);
+			
+			pst.setString(1, userid);
+			rs = pst.executeQuery();
+		
 			
 			
 			
@@ -87,9 +92,7 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 				} else {
 					return 2; // 비밀번호 틀렸을때
 				}
-			} else {
-				
-			}
+			} 
 			return -1; //해당하지 않으면 실패토큰 -1 출력
 		}
 		 catch(Exception e) {

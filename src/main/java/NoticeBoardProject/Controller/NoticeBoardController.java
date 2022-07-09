@@ -8,13 +8,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import NoticeBoardProject.DAO.NoticeBoardDAOImpl;
 import NoticeBoardProject.DAO.NoticeBoardDAOService;
+import NoticeBoardProject.DAO.Token.LoginToken;
 
 @WebServlet("/NoticeBoardLoginController")
 public class NoticeBoardController extends HttpServlet{
+	
+	
+	
 	private int check;
 	private String userId;
 	private String userPwd;
@@ -43,37 +46,45 @@ public class NoticeBoardController extends HttpServlet{
 		PrintWriter out=response.getWriter();
 		
 		check = noticeBoardDaoImpl.GetTokenOfLoginCheck(userId, userPwd);
-				
-		
-		
-		if (check ==1) { 
-			//session.setAttribute("userId", userId);
-			out.println("<script>");
-			out.println("location.href='main.jsp'");
-			out.println("</script>");
 			
-			//response.sendRedirect("/NoticeBoardProject/loginresult.jsp");
-		}
-			else if (check ==2) {
-			out.println("<script>");
-			out.println("alert('비밀번호가 틀립니다')");
-			out.println("location.href='loginPage.jsp'");
-			out.println("</script>");
-		}
-			else if (check == -1) {
-			out.println("<script>");
-			out.println("alert('아이디가 없습니다')");
-			out.println("location.href='loginPage.jsp'");
-			out.println("</script>");
+		LoginToken loginToken = new LoginToken(check);
+		
+		
+		switch(loginToken.getTokenName()) {
+			case "LOGINSUCCESS":
+				//session.setAttribute("userId", userId);
+				out.println("<script>");
+				out.println("location.href='main.jsp'");
+				out.println("</script>");
+				break;
+			case "LOGINIDPWDNOTMATCH":
+				out.println("<script>");
+				out.println("alert('비밀번호가 틀립니다')");
+				out.println("location.href='loginPage.jsp'");
+				out.println("</script>");
+				break;
+			case "LOGINFAIL":
+				out.println("<script>");
+				out.println("alert('아이디가 없습니다')");
+				out.println("location.href='loginPage.jsp'");
+				out.println("</script>");
+				break;
+			default:
+				out.println("<script>");
+				out.println("alert('오류')");
+				out.println("location.href='loginPage.jsp'");
+				out.println("</script>");
+			
+				break;
+		
+		
+		
+		
 		}
 		
-			else {
-			out.println("<script>");
-			out.println("alert('오류')");
-			out.println("location.href='loginPage.jsp'");
-			out.println("</script>");
-		}
 		
 	}
-	
+
+
+
 }
