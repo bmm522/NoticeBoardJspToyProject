@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
  <head>
@@ -36,13 +37,15 @@
 						    </tr>
 						  </thead>
 						  <tbody>
+						    <c:forEach var="t" items="${table}">
 						    <tr>
-						      <th scope="row">1</th>
-						      <td>첫글입니다</td>
-						      <td>Otto</td>
-						      <td>2022-07-06</td>
-						      <td>123</td>
+						      <th scope="row">${t.id}</th>
+						      <td>${t.title}</td>
+						      <td>${t.writer_id}</td>
+						      <td>${t.regdate}</td>
+						      <td>${t.hit}</td>
 						    </tr>
+						    </c:forEach>
 						  </tbody>
 						</table>
 					</div>

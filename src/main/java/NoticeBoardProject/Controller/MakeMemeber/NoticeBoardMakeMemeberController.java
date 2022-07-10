@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import NoticeBoardProject.DAO.NoticeBoardDAOImpl;
 import NoticeBoardProject.DAO.NoticeBoardDAOService;
@@ -17,19 +18,20 @@ import NoticeBoardProject.DAO.Token.Token;
 public class NoticeBoardMakeMemeberController extends HttpServlet{
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 				
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 
 		MakeMemberAction(request.getParameter("user_ID"), request.getParameter("user_PW"), 
 				request.getParameter("user_Name"), request.getParameter("user_Phonenum"),
-				request.getParameter("user_Email"), response.getWriter());
+				request.getParameter("user_Email"), response.getWriter(), request);
 	}
 
 
 	private void MakeMemberAction(String userId, String userPwd, String userName, String userPhonenum,
-			String userEmail, PrintWriter out) {
+			String userEmail, PrintWriter out, HttpServletRequest request) {
 	
 		if (userId == "" || userPwd == "" || userName == "" 
 				|| userName == "" || userPhonenum == "") {
@@ -40,17 +42,17 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 			
 		}	else { 
 			MakeMemberActionLogic(userId, userPwd, userName, userPhonenum,
-				userEmail, out);
+				userEmail, out, request);
 		}
 		
 	}
 	private void MakeMemberActionLogic(String userId, String userPwd, String userName, String userPhonenum,
-			String userEmail, PrintWriter out) {
+			String userEmail, PrintWriter out,  HttpServletRequest request) {
 		
 		NoticeBoardDAOService nd = new NoticeBoardDAOImpl();
 		try {
 			MakeMemberActionLogiccheck(nd.GetTokenOfMakeMember
-					(userId, userPwd, userName, userPhonenum, userEmail), out);
+					(userId, userPwd, userName, userPhonenum, userEmail), out, request.getSession(), userId);
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -58,7 +60,7 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 	}
 
 
-	private void MakeMemberActionLogiccheck(Token token, PrintWriter out) {
+	private void MakeMemberActionLogiccheck(Token token, PrintWriter out, HttpSession session, String userId) {
 		switch(token) {
 			case MAKEMEMBERFAIL:
 				out.println("<script>");
@@ -67,9 +69,10 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 				out.println("</script>");
 				
 			case MAKEMEMBERSUCCESS:
+				session.setAttribute("userId", userId);
 				out.println("<script>");
 				out.println("alert('회원가입 성공')");
-				out.println("location.href='loginPage.jsp'");
+				out.println("location.href='table.jsp'");
 				out.println("</script>");
 		
 		}

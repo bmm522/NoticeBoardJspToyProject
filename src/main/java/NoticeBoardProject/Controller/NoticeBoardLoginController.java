@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import NoticeBoardProject.DAO.NoticeBoardDAOImpl;
 import NoticeBoardProject.DAO.NoticeBoardDAOService;
@@ -25,28 +26,28 @@ public class NoticeBoardLoginController extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		//인코딩 설정
-		LoginAfterMovePage(request.getParameter("User_Id"), request.getParameter("User_Pwd"), response);
+		LoginAfterMovePage(request.getParameter("User_Id"), request.getParameter("User_Pwd"), response, request);
 		}
 		
 		
 	
-	protected void LoginAfterMovePage(String userId, String userPwd, HttpServletResponse response)
+	protected void LoginAfterMovePage(String userId, String userPwd, HttpServletResponse response, HttpServletRequest request)
 			throws IOException {
 		
 		NoticeBoardDAOService noticeBoardDaoImpl = new NoticeBoardDAOImpl();
-		PrintWriter out=response.getWriter();
-		LoginAfterMovePageSwitch (noticeBoardDaoImpl.GetTokenOfLoginCheck(userId, userPwd), response.getWriter());
-		
+		LoginAfterMovePageSwitch (noticeBoardDaoImpl.GetTokenOfLoginCheck(userId, userPwd), response.getWriter(), 
+				request.getSession(), userId);
 		
 		
 		}
 
-	protected void LoginAfterMovePageSwitch(Token token, PrintWriter out) {
+	protected void LoginAfterMovePageSwitch(Token token, PrintWriter out, HttpSession session, String userId) {
+			
 			switch(token) {
 				case LOGINSUCCESS:
-					//session.setAttribute("userId", userId);
+					session.setAttribute("userId", userId);
 					out.println("<script>");
-					out.println("location.href='main.jsp'");
+					out.println("location.href='table.jsp'");
 					out.println("</script>");
 					break;
 				case LOGINFAIL:
