@@ -112,12 +112,11 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 	
 	
 	@Override
-	public int GetTokenOfMakeMember(String newUserId, String newUserPw, String newUserName, String newUserPhonenum,
+	public Token GetTokenOfMakeMember(String newUserId, String newUserPw, String newUserName, String newUserPhonenum,
 			String newUserEmail) {
 		String sql = "INSERT INTO BOARDMEMBER(USERID, USERPWD, USERNAME, PHONENUM, EMAIL) VALUES (?, ?, ?, ?, ?)";
 		LoginEntity loginEntity = new LoginEntity
 				(newUserId, newUserPw, newUserName, newUserPhonenum,newUserEmail);
-		
 		try {
 			
 			pst = con.prepareStatement(sql);
@@ -127,14 +126,9 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 			pst.setString(3, loginEntity.getUserName());
 			pst.setString(4, loginEntity.getPhoneNum());
 			pst.setString(5, loginEntity.getEmail());
+			pst.executeUpdate();
 			
-			try {
-				return pst.executeUpdate(); //회원가입 성공토큰 1
-				
-			} catch(SQLException e) {
-				e.printStackTrace();
-				return -1;
-			}
+			return  Token.MAKEMEMBERSUCCESS;
 			
 			
 		}
@@ -150,8 +144,7 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 			
 		
 		}
-		
-		return -1;
+		return Token.MAKEMEMBERFAIL;
 			
 	}
 }	

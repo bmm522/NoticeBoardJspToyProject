@@ -9,6 +9,6 @@ public interface NoticeBoardDAOService {
 	
 	public Token GetTokenOfLoginCheck(String userid, String userpwd);
 
-	public int GetTokenOfMakeMember(String newUserId, String newUserPw, String newUserName, String newUserPhonenum,
+	public Token GetTokenOfMakeMember(String newUserId, String newUserPw, String newUserName, String newUserPhonenum,
 			String newUserEmail);
 }
