@@ -83,11 +83,6 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAOService{
 	
 	
 	
-	
-	
-	
-	
-	
 	public Token GetTokenOfMakeMember(String newUserId, String newUserPw, String newUserName, String newUserPhonenum,
 			String newUserEmail) {
 		String sql = "INSERT INTO BOARDMEMBER(USERID, USERPWD, USERNAME, PHONENUM, EMAIL) VALUES (?, ?, ?, ?, ?)";

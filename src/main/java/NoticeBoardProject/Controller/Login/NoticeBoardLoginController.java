@@ -1,4 +1,4 @@
-package NoticeBoardProject.Controller;
+package NoticeBoardProject.Controller.Login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import NoticeBoardProject.DAO.NoticeBoardDAOImpl;
-import NoticeBoardProject.DAO.NoticeBoardDAOService;
+import NoticeBoardProject.DAO.LoginDAO;
+import NoticeBoardProject.DAO.NoticeBoardProjectDAO;
 import NoticeBoardProject.DAO.Token.Token;
 
 
@@ -33,12 +33,9 @@ public class NoticeBoardLoginController extends HttpServlet{
 	
 	protected void LoginAfterMovePage(String userId, String userPwd, HttpServletResponse response, HttpServletRequest request)
 			throws IOException {
-		
-		NoticeBoardDAOService noticeBoardDaoImpl = new NoticeBoardDAOImpl();
-		LoginAfterMovePageSwitch (noticeBoardDaoImpl.GetTokenOfLoginCheck(userId, userPwd), response.getWriter(), 
-				request.getSession(), userId);
-		
-		
+		NoticeBoardProjectDAO noticeBoardDaoImpl = new LoginDAO();
+		LoginAfterMovePageSwitch (((LoginDAO) noticeBoardDaoImpl)
+				.GetTokenOfLoginCheck(userId, userPwd), response.getWriter(), request.getSession(), userId);
 		}
 
 	protected void LoginAfterMovePageSwitch(Token token, PrintWriter out, HttpSession session, String userId) {
