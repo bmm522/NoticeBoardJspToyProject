@@ -37,6 +37,8 @@ public class NoticeBoardLoginController extends HttpServlet{
 		LoginAfterMovePageSwitch (((LoginDAO) noticeBoardDaoImpl)
 				.GetTokenOfLoginCheck(userId, userPwd), response.getWriter(), request.getSession(), userId);
 		}
+	
+	
 
 	protected void LoginAfterMovePageSwitch(Token token, PrintWriter out, HttpSession session, String userId) {
 			

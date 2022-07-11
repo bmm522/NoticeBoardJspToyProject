@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import NoticeBoardProject.DAO.NoticeBoardDAOImpl;
-import NoticeBoardProject.DAO.NoticeBoardDAOService;
+import NoticeBoardProject.DAO.MakeMemberDAO;
+import NoticeBoardProject.DAO.NoticeBoardProjectDAO;
 import NoticeBoardProject.DAO.Token.Token;
 
 @WebServlet("/NoticeBoardMakeMemberController")
@@ -49,7 +49,7 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 	private void MakeMemberActionLogic(String userId, String userPwd, String userName, String userPhonenum,
 			String userEmail, PrintWriter out,  HttpServletRequest request) {
 		
-		NoticeBoardDAOService nd = new NoticeBoardDAOImpl();
+		MakeMemberDAO nd = new MakeMemberDAO();
 		try {
 			MakeMemberActionLogiccheck(nd.GetTokenOfMakeMember
 					(userId, userPwd, userName, userPhonenum, userEmail), out, request.getSession(), userId);

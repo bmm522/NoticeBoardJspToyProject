@@ -10,14 +10,13 @@ import NoticeBoardProject.DAO.Token.Token;
 public class LoginDAO extends NoticeBoardProjectDAO{
 
 	
-
 	public Token GetTokenOfLoginCheck(String userId, String userPwd)  {
 			String sql = "SELECT USERPWD FROM BOARDMEMBER WHERE USERID=? AND USERPWD=?";
 			Connection con = ConnectionDriver();
 			PreparedStatement pst = null;
 			ResultSet rs = null;
 			try {
-				pst = GetLoginPst(con.prepareStatement(sql), sql,con, userId, userPwd);
+				pst = GetLoginPst(con.prepareStatement(sql), sql, userId, userPwd);
 				rs = pst.executeQuery();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -25,7 +24,9 @@ public class LoginDAO extends NoticeBoardProjectDAO{
 			return GetTokenOfLoginCheckIfLogic(con, pst ,rs);
 		}
 	
-	
+
+
+
 	public Token GetTokenOfLoginCheckIfLogic(Connection con, PreparedStatement pst, ResultSet rs) {
 		try {	
 			if(rs.next()) 
