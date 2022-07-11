@@ -20,39 +20,12 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Table #01</h2>
+					<h2 class="heading-section">글작성</h2>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="table-wrap">
-						<table class="table">
-						  <thead class="thead-primary">
-						    <tr>
-						      <th>글번호</th>
-						      <th>글제목</th>
-						      <th>작성자</th>
-						      <th>작성날짜</th>
-						      <th>조회수</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						    <c:forEach var="t" items="${table}">
-						    <tr>
-						      <th scope="row">${t.id}</th>
-						      <td>${t.title}</td>
-						      <td>${t.writer_id}</td>
-						      <td>${t.regdate}</td>
-						      <td>${t.hit}</td>
-						    </tr>
-						    </c:forEach>
-						  </tbody>
-						</table>
-						
-					</div>
-					<a href="writer" class="btn btn-primary pull-right">글쓰기</a>
-				</div>
-			</div>
+			<td><input type="text" class="form-control" placeholder ="글 제목" name="title" maxlength="50"></td>
+		 	<td><textarea type="text" class="form-control" placeholder="글 내용" name="content" maxlength="2048" style ="height: 350px;"></textarea> 
+			<a href="contentupload" class="btn btn-primary pull-right">글등록</a>
 		</div>
 	</section>
 

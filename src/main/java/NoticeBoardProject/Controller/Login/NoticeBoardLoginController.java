@@ -46,7 +46,7 @@ public class NoticeBoardLoginController extends HttpServlet{
 				case LOGINSUCCESS:
 					session.setAttribute("userId", userId);
 					out.println("<script>");
-					out.println("location.href='table.jsp'");
+					out.println("location.href='table'");
 					out.println("</script>");
 					break;
 				case LOGINFAIL:
