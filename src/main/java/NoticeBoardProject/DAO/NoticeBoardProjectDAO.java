@@ -70,16 +70,19 @@ public abstract class NoticeBoardProjectDAO {
 		}
 	}
 	
-	public void InsertData(String title, String content, Object userId ,PreparedStatement pst) {
+	public void InsertData(String title, String content, Object userId ,Connection con,PreparedStatement pst) {
 		
 		try {
 			pst.setString(1, title);
 			pst.setString(2, content);
 			pst.setObject(3, userId);
+			pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("InserData¿À·ù");
 			
+		} finally {
+			JdbcClose(con, pst);
 		}
 		
 	}

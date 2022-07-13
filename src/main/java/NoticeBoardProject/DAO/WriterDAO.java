@@ -13,13 +13,11 @@ public class WriterDAO extends NoticeBoardProjectDAO{
 		PreparedStatement pst = null;
 		try {
 			pst = con.prepareStatement(sql);
-			InsertData(title, content, userId, pst);
+			InsertData(title, content, userId, con ,pst);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("InsertWriter¿À·ù");
-		} finally {
-			JdbcClose(con, pst);
-		}
+		} 
 		
 	}
 	

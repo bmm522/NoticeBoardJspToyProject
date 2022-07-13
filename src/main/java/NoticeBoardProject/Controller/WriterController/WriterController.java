@@ -19,7 +19,7 @@ public class WriterController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charest=UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		
 		HttpSession session = request.getSession();
 		WriterDAO wd = new WriterDAO();
@@ -33,7 +33,7 @@ public class WriterController extends HttpServlet{
 		out.println("<script>");
 		out.println("alert('글이 생성되었습니다.')");
 		out.println("location.href='table'");
-		out.println("</script");
+		out.println("</script>");
 		
 		
 	}
