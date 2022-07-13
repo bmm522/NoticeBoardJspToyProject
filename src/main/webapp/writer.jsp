@@ -23,9 +23,13 @@
 					<h2 class="heading-section">글작성</h2>
 				</div>
 			</div>
-			<td><input type="text" class="form-control" placeholder ="글 제목" name="title" maxlength="50"></td>
-		 	<td><textarea type="text" class="form-control" placeholder="글 내용" name="content" maxlength="2048" style ="height: 350px;"></textarea> 
-			<a href="contentupload" class="btn btn-primary pull-right">글등록</a>
+			<div>
+				<form method ="post" action = "Writer">
+					<td><input type="text" class="form-control" placeholder ="글 제목" name="title" maxlength="50"></td>
+				 	<td><textarea type="text" class="form-control" placeholder="글 내용" name="content" maxlength="2048" style ="height: 350px;"></textarea> 
+					<input type="submit" class="btn btn-primary pull-right" value ="글등록"/>
+				</form>
+			<div>
 		</div>
 	</section>
 
