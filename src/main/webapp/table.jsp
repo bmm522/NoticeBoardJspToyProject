@@ -50,7 +50,7 @@
 						</table>
 						
 					</div>
-					<a href="writer" class="btn btn-primary pull-right">글쓰기</a>
+					<a href="writer.jsp" class="btn btn-primary pull-right">글쓰기</a>
 				</div>
 			</div>
 		</div>

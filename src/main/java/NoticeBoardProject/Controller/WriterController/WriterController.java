@@ -1,6 +1,7 @@
 package NoticeBoardProject.Controller.WriterController;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import NoticeBoardProject.DAO.WriterDAO;
 
 @WebServlet("/Writer")
 public class WriterController extends HttpServlet{
@@ -19,7 +22,20 @@ public class WriterController extends HttpServlet{
 		response.setContentType("text/html; charest=UTF-8");
 		
 		HttpSession session = request.getSession();
-		String writer_id = (String) session.getAttribute("userId");
+		WriterDAO wd = new WriterDAO();
+		wd.InsertWriter(request.getParameter("title"), 
+				request.getParameter("content"), 
+				session.getAttribute("userId"));
+		ReturnPage(response.getWriter());
+	}
+	
+	private void ReturnPage(PrintWriter out) {
+		out.println("<script>");
+		out.println("alert('글이 생성되었습니다.')");
+		out.println("location.href='table'");
+		out.println("</script");
+		
+		
 	}
 	
 }

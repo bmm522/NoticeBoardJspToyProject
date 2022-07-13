@@ -21,9 +21,11 @@ public abstract class NoticeBoardProjectDAO {
 		}
 		catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			System.out.println("ConnectionDriver오류");
 		} 
 		catch(SQLException e) {
 			e.printStackTrace();
+			System.out.println("ConnectionDriver오류");
 		}
 		return con;
 	}
@@ -47,6 +49,7 @@ public abstract class NoticeBoardProjectDAO {
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("SetStringOfAddMember오류");
 		}
 	}
 	
@@ -63,23 +66,38 @@ public abstract class NoticeBoardProjectDAO {
 			pst.setString(2, userPwd);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("SetStringOfGetLoginPst오류");
 		}
 	}
 	
-	public void MakeMemberJdbcClose(Connection con, PreparedStatement pst) {
+	public void InsertData(String title, String content, Object userId ,PreparedStatement pst) {
+		
+		try {
+			pst.setString(1, title);
+			pst.setString(2, content);
+			pst.setObject(3, userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("InserData오류");
+			
+		}
+		
+	}
+	
+	public void JdbcClose(Connection con, PreparedStatement pst) {
 		if (pst != null) try { pst.close(); } catch(SQLException e) {}
 		if (con != null) try { con.close(); } catch(SQLException e) {}	
 		
 	}
 
-	public void LoginJdbcClose(Connection con, PreparedStatement pst, ResultSet rs) {
+	public void JdbcClose(Connection con, PreparedStatement pst, ResultSet rs) {
 		if (rs != null) try { rs.close(); } catch(SQLException e) {}
 		if (pst != null) try { pst.close(); } catch(SQLException e) {}
 		if (con != null) try { con.close(); } catch(SQLException e) {}
 		
 	}
 
-	public void GetTableJdbcClose(Connection con, Statement st, ResultSet rs) {
+	public void JdbcClose(Connection con, Statement st, ResultSet rs) {
 		if (rs != null) try { rs.close(); } catch(SQLException e) {}
 		if (st != null) try { st.close(); } catch(SQLException e) {}
 		if (con != null) try { con.close(); } catch(SQLException e) {}

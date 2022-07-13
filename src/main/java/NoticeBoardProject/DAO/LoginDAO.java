@@ -36,7 +36,7 @@ public class LoginDAO extends NoticeBoardProjectDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			} finally {
-				 LoginJdbcClose(con, pst, rs); //강제로 예외발생시켜서 닫게함
+				 JdbcClose(con, pst, rs); //강제로 예외발생시켜서 닫게함
 			}
 			return Token.LOGINERROR;
 		}

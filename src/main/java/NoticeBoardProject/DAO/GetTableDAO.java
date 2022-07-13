@@ -35,7 +35,7 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 		} catch(SQLException e) {
 			System.out.println("GetTableList¿À·ù");
 		} finally {
-			GetTableJdbcClose(con, st, rs);
+			JdbcClose(con, st, rs);
 		}
 		return list;
 	}

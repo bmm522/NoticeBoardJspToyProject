@@ -24,7 +24,7 @@ public class MakeMemberDAO extends NoticeBoardProjectDAO{
 			catch(Exception e) {
 			e.printStackTrace();
 		}	finally {
-			MakeMemberJdbcClose(con, pst);
+			JdbcClose(con, pst);
 		}
 		return Token.MAKEMEMBERFAIL;
 			

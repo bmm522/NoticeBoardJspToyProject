@@ -41,8 +41,13 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 			out.println("</script>");
 			
 		}	else { 
-			MakeMemberActionLogic(userId, userPwd, userName, userPhonenum,
-				userEmail, out, request);
+			MakeMemberActionLogic(userId, 
+					userPwd, 
+					userName, 
+					userPhonenum,
+				userEmail, 
+				out, 
+				request);
 		}
 		
 	}
@@ -52,7 +57,9 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 		MakeMemberDAO nd = new MakeMemberDAO();
 		try {
 			MakeMemberActionLogiccheck(nd.GetTokenOfMakeMember
-					(userId, userPwd, userName, userPhonenum, userEmail), out, request.getSession(), userId);
+					(userId, userPwd, userName, userPhonenum, userEmail), 
+					out, 
+					request.getSession(), userId);
 		} catch (Exception e) {
 			
 			e.printStackTrace();

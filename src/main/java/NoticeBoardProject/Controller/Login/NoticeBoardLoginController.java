@@ -35,7 +35,10 @@ public class NoticeBoardLoginController extends HttpServlet{
 			throws IOException {
 		NoticeBoardProjectDAO noticeBoardDaoImpl = new LoginDAO();
 		LoginAfterMovePageSwitch (((LoginDAO) noticeBoardDaoImpl)
-				.GetTokenOfLoginCheck(userId, userPwd), response.getWriter(), request.getSession(), userId);
+				.GetTokenOfLoginCheck(userId, userPwd), 
+				response.getWriter(),
+				request.getSession(), 
+				userId);
 		}
 	
 	
