@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="NoticeBoardProject.DAO.WriterDAO" %>
+<% String userId = (String)session.getAttribute("userId");%>
 <!DOCTYPE html>
 <html>
  <head>
@@ -45,9 +47,12 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			
 			<a href="table" class="btn btn-primary">목록</a>
+			<c:if test="${userId eq view[0].writer_id}">
 			<a href="table" class="btn btn-primary">수정</a>
 			<a href="table" class="btn btn-primary">삭제</a>
+			</c:if>
 			</div>
 			</div>
 			
