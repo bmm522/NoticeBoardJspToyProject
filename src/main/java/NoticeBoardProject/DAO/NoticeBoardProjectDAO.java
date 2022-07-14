@@ -73,12 +73,12 @@ public abstract class NoticeBoardProjectDAO {
 		}
 	}
 	
-	public void InsertData(String title, String content, Object userId ,Connection con,PreparedStatement pst) {
+	public void InsertData(String title, Object userId, String content ,Connection con,PreparedStatement pst) {
 		
 		try {
 			pst.setString(1, title);
-			pst.setString(2, content);
-			pst.setObject(3, userId);
+			pst.setObject(2, userId);
+			pst.setString(3, content);
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

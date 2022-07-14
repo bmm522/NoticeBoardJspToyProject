@@ -24,8 +24,8 @@ public class WriterController extends HttpServlet{
 		HttpSession session = request.getSession();
 		WriterDAO wd = new WriterDAO();
 		wd.InsertWriter(request.getParameter("title"), 
-				request.getParameter("content"), 
-				session.getAttribute("userId"));
+				session.getAttribute("userId"),
+				request.getParameter("content"));
 		ReturnPage(response.getWriter());
 	}
 	
