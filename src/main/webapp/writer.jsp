@@ -29,7 +29,7 @@
 				 	<td><textarea type="text" class="form-control" placeholder="글 내용" name="content" maxlength="2048" style ="height: 350px;"></textarea> 
 					<input type="submit" class="btn btn-primary pull-right" value ="글등록"/>
 				</form>
-			<div>
+			</div>
 		</div>
 	</section>
 
