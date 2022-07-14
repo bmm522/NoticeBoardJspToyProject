@@ -40,7 +40,8 @@
 						    <c:forEach var="t" items="${table}">
 						    <tr>
 						      <th scope="row">${t.id}</th>
-						      <td>${t.title}</td>
+						      <td><a href="view?id=${t.id}">${t.title}</a></td>
+						     
 						      <td>${t.writer_id}</td>
 						      <td>${t.regdate}</td>
 						      <td>${t.hit}</td>

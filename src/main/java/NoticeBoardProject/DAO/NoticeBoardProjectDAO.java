@@ -1,14 +1,17 @@
 package NoticeBoardProject.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-import NoticeBoardProject.DAO.Token.Token;
 import NoticeBoardProject.entity.LoginEntity;
+import NoticeBoardProject.entity.ViewEntity;
 
 public abstract class NoticeBoardProjectDAO {
 	
@@ -84,6 +87,44 @@ public abstract class NoticeBoardProjectDAO {
 		} finally {
 			JdbcClose(con, pst);
 		}
+		
+	}
+	
+	public List<ViewEntity> GetViewFromDatabase(Connection con, PreparedStatement pst, ResultSet rs, String sql, int id){
+		
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setInt(1, id);
+			rs=pst.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("GetViewFromDatabase오류");
+		}
+		return GetViewFromDataBaseEntity(con, pst, rs);
+	}
+	
+	public List<ViewEntity> GetViewFromDataBaseEntity(Connection con, PreparedStatement pst, ResultSet rs){
+		List<ViewEntity> list = new ArrayList<>();
+		try {
+			rs.next();
+			list.add(GetViewEntity(
+					rs.getString("TITLE"), 
+					rs.getString("WRITER_ID"),
+					rs.getString("CONTENT"),
+					rs.getDate("REGDATE")));
+			JdbcClose(con, pst, rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("GetViewFromDataBaseEntity오류");
+		}
+		return list;
+		
+	}
+	
+	public ViewEntity GetViewEntity(String title, String writer_id, String content, Date regdate) {
+		ViewEntity ve = new ViewEntity(title, writer_id, content, regdate);
+		return ve;
 		
 	}
 	
