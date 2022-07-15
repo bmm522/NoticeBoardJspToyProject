@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="NoticeBoardProject.DAO.WriterDAO" %>
-<% String userId = (String)session.getAttribute("userId");%>
+<%@ page import="NoticeBoardProject.Controller.View.ViewController" %>
+<%@ page import="NoticeBoardProject.entity.ViewEntity" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<% 
+String userId = (String)session.getAttribute("userId");
+List<ViewEntity> list = new ArrayList<>();
+list =(List<ViewEntity>)request.getAttribute("view");
+request.setAttribute("update", list); 
+%>
 <!DOCTYPE html>
 <html>
  <head>
@@ -50,7 +58,7 @@
 			
 			<a href="table" class="btn btn-primary">목록</a>
 			<c:if test="${userId eq view[0].writer_id}">
-			<a href="table" class="btn btn-primary">수정</a>
+			<a href="update.jsp" class="btn btn-primary">수정</a>
 			<a href="table" class="btn btn-primary">삭제</a>
 			</c:if>
 			</div>

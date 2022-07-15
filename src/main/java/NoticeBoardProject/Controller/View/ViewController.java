@@ -21,5 +21,6 @@ public class ViewController extends HttpServlet{
 		ViewDAO vd = new ViewDAO();
 		request.setAttribute("view", vd.GetView(id));
 		request.getRequestDispatcher("/view.jsp").forward(request, response);
+		
 	}
 }
