@@ -11,7 +11,7 @@ import NoticeBoardProject.entity.ViewEntity;
 public class ViewDAO extends NoticeBoardProjectDAO{
 
 	public List<ViewEntity> GetView(int id) {
-		String sql = "SELECT TITLE, WRITER_ID,CONTENT, REGDATE FROM TABLELIST WHERE ID=?";
+		String sql = "SELECT ID, TITLE, WRITER_ID,CONTENT, REGDATE FROM TABLELIST WHERE ID=?";
 		Connection con = ConnectionDriver();
 		PreparedStatement pst = null;
 		ResultSet rs = null;

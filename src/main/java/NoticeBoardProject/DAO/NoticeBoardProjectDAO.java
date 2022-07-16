@@ -109,6 +109,7 @@ public abstract class NoticeBoardProjectDAO {
 		try {
 			rs.next();
 			list.add(GetViewEntity(
+					rs.getInt("ID"),
 					rs.getString("TITLE"), 
 					rs.getString("WRITER_ID"),
 					rs.getString("CONTENT"),
@@ -122,8 +123,8 @@ public abstract class NoticeBoardProjectDAO {
 		
 	}
 	
-	public ViewEntity GetViewEntity(String title, String writer_id, String content, Date regdate) {
-		ViewEntity ve = new ViewEntity(title, writer_id, content, regdate);
+	public ViewEntity GetViewEntity(int id, String title, String writer_id, String content, Date regdate) {
+		ViewEntity ve = new ViewEntity(id, title, writer_id, content, regdate);
 		return ve;
 		
 	}

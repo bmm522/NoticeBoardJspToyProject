@@ -7,9 +7,7 @@
 <%@ page import="java.util.List" %>
 <% 
 String userId = (String)session.getAttribute("userId");
-List<ViewEntity> list = new ArrayList<>();
-list =(List<ViewEntity>)request.getAttribute("view");
-request.setAttribute("update", list); 
+
 %>
 <!DOCTYPE html>
 <html>
@@ -58,7 +56,7 @@ request.setAttribute("update", list);
 			
 			<a href="table" class="btn btn-primary">목록</a>
 			<c:if test="${userId eq view[0].writer_id}">
-			<a href="update.jsp" class="btn btn-primary">수정</a>
+			<a href="update?id=${view[0].id}" class="btn btn-primary">수정</a>
 			<a href="table" class="btn btn-primary">삭제</a>
 			</c:if>
 			</div>

@@ -3,7 +3,7 @@ package NoticeBoardProject.entity;
 import java.sql.Date;
 
 public class ViewEntity {
-	
+	int id;
 	String title;
 	String writer_id;
 	String content;
@@ -12,7 +12,8 @@ public class ViewEntity {
 	public ViewEntity() {
 		
 	}
-	public ViewEntity(String title, String writer_id, String content, Date regdate) {
+	public ViewEntity(int id, String title, String writer_id, String content, Date regdate) {
+		this.id = id;
 		this.title = title;
 		this.writer_id = writer_id;
 		this.content = content;
@@ -20,6 +21,12 @@ public class ViewEntity {
 	}
 
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}

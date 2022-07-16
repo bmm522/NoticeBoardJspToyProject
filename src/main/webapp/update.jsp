@@ -5,10 +5,6 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="NoticeBoardProject.entity.ViewEntity" %>
 <!DOCTYPE html>
-<%
-List<ViewEntity> list = new ArrayList<>();
-list = (List<ViewEntity>)request.getAttribute("update");
-%>
 <html>
  <head>
   	<title>Table 01</title>
@@ -31,13 +27,13 @@ list = (List<ViewEntity>)request.getAttribute("update");
 				</div>
 			</div>
 			<div>
-			<c:forEach var="u" items="${update}">
+			
 				<form method ="post" action = "Writer">
-					<td><input type="text" class="form-control" placeholder ="${u.title}" name="title" maxlength="50"></td>
-				 	<td><textarea type="text" class="form-control" placeholder="${u.content}" name="content" maxlength="2048" style ="height: 350px;"></textarea> 
+					<td><input type="text" class="form-control" placeholder ="${update[0].title}" name="title" maxlength="50"></td>
+				 	<td><textarea type="text" class="form-control" placeholder="${update[0].content}" name="content" maxlength="2048" style ="height: 350px;"></textarea> 
 					<input type="submit" class="btn btn-primary pull-right" value ="글등록"/>
 				</form>
-			</c:forEach>
+			
 			</div>
 		</div>
 	</section>
