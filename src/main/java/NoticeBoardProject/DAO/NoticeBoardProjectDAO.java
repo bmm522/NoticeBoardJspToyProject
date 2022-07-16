@@ -123,11 +123,31 @@ public abstract class NoticeBoardProjectDAO {
 		
 	}
 	
+	
+	
 	public ViewEntity GetViewEntity(int id, String title, String writer_id, String content, Date regdate) {
 		ViewEntity ve = new ViewEntity(id, title, writer_id, content, regdate);
 		return ve;
 		
 	}
+	public void updateInDatabase(String title, String content, int id, Connection con, PreparedStatement pst) {
+		
+		try {
+			pst.setString(1, title);
+			pst.setString(2, content);
+			pst.setInt(3, id);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("updateInDAtabase¿À·ù");
+			
+		} finally {
+			JdbcClose(con, pst);
+		}
+		
+	}
+		
+	
 	
 	public void JdbcClose(Connection con, PreparedStatement pst) {
 		if (pst != null) try { pst.close(); } catch(SQLException e) {}

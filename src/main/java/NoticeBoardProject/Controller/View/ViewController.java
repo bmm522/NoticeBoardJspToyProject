@@ -17,10 +17,11 @@ public class ViewController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		int id = Integer.parseInt(request.getParameter("id"));
 		ViewDAO vd = new ViewDAO();
+		int id = Integer.parseInt(request.getParameter("id"));
 		request.setAttribute("view", vd.GetView(id));
 		request.getRequestDispatcher("/view.jsp").forward(request, response);
 		
 	}
+
 }

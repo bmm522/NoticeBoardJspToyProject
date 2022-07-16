@@ -4,6 +4,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="NoticeBoardProject.entity.ViewEntity" %>
+
 <!DOCTYPE html>
 <html>
  <head>
@@ -28,10 +29,12 @@
 			</div>
 			<div>
 			
-				<form method ="post" action = "Writer">
+				<form method ="post" action = "update">
 					<td><input type="text" class="form-control" placeholder ="${update[0].title}" name="title" maxlength="50"></td>
 				 	<td><textarea type="text" class="form-control" placeholder="${update[0].content}" name="content" maxlength="2048" style ="height: 350px;"></textarea> 
+					<td><input type="hidden" name="id" value = "${update[0].id}"/></td>
 					<input type="submit" class="btn btn-primary pull-right" value ="글등록"/>
+					
 				</form>
 			
 			</div>

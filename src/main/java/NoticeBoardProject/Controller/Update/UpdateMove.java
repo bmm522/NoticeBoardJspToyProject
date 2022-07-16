@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import NoticeBoardProject.DAO.ViewDAO;
 
-@WebServlet("/update")
+@WebServlet("/updatemove")
 public class UpdateMove extends HttpServlet{
 	
 	@Override
