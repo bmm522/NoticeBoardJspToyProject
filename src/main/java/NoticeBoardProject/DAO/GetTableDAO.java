@@ -14,7 +14,7 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 	
 	public List<TableEntity> GetTable() throws SQLException {
 		
-		String sql ="SELECT ID, TITLE, WRITER_ID, REGDATE, HIT FROM TABLELIST";
+		String sql ="SELECT ID, TITLE, WRITER_ID, REGDATE, HIT FROM TABLELIST ORDER BY ID DESC";
 		Connection con = ConnectionDriver();
 		Statement st = null;
 		ResultSet rs = null;
