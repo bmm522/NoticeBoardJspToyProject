@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DeleteDAO extends NoticeBoardProjectDAO{
 	
 	public void deletePage(int id) {
-		String sql = "DELETE TABLELIST WHERE ID=?";
+		String sql = "UPDATE TABLELIST SET PUB = 0 WHERE ID=?";
 		Connection con = ConnectionDriver();
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
