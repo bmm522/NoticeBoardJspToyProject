@@ -146,6 +146,17 @@ public abstract class NoticeBoardProjectDAO {
 		}
 		
 	}
+	
+	public void deleteInDatabase(Connection con, PreparedStatement pst, int id) {
+		try {
+			pst.setInt(1, id);			
+		}catch(SQLException e){
+			System.out.println("deleteInDatabase¿À·ù");
+		}finally {
+			JdbcClose(con, pst);
+		}
+		
+	}
 		
 	
 	

@@ -57,7 +57,7 @@ String userId = (String)session.getAttribute("userId");
 			<a href="table" class="btn btn-primary">목록</a>
 			<c:if test="${userId eq view[0].writer_id}">
 			<a href="updatemove?id=${view[0].id}" class="btn btn-primary">수정</a>
-			<a href="table" class="btn btn-primary">삭제</a>
+			<a href="delete?id=${view[0].id}" class="btn btn-primary">삭제</a>
 			</c:if>
 			</div>
 			</div>
