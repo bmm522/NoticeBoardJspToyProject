@@ -158,6 +158,20 @@ public abstract class NoticeBoardProjectDAO {
 		}
 		
 	}
+	
+	public int getTotalCountValue(Connection con, Statement st, ResultSet rs){
+		int totalDataCount = 0;
+		try {
+			rs.next();
+			return totalDataCount = rs.getInt("COUNT(ROWNUM)");
+		} catch (SQLException e) {
+			System.out.println("getTotalCountValue¿À·ù");
+		} finally {
+			JdbcClose(con, st, rs);
+		}
+		return totalDataCount;
+		
+	}
 		
 	
 	

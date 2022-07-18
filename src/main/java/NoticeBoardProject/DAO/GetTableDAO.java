@@ -13,11 +13,12 @@ import NoticeBoardProject.entity.TableEntity;
 public class GetTableDAO extends NoticeBoardProjectDAO{
 	
 	public List<TableEntity> GetTable() throws SQLException {
-		
-		String sql ="SELECT ID, TITLE, WRITER_ID, REGDATE, HIT FROM TABLELIST ORDER BY ID DESC";
+		int pageNumber = getTotal();
+		String sql ="SELECT ID, TITLE, WRITER_ID, REGDATE, HIT FROM TABLELIST WHERE ROWNUM < 10 ORDER BY ID DESC";
 		Connection con = ConnectionDriver();
 		Statement st = null;
 		ResultSet rs = null;
+		
 		
 		List<TableEntity> list = new ArrayList<>();
 		st = con.createStatement();
@@ -45,5 +46,14 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 			String writer_id, Date regdate, int hit) {
 		TableEntity te = new TableEntity(id, title, writer_id, regdate, hit);
 		return te;
+	}
+	
+	private int getTotal() throws SQLException {
+		String sql = "SELECT COUNT(ROWNUM) FROM TABLELIST";
+		Connection con = ConnectionDriver();
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return getTotalCountValue(con, st, rs);
+		
 	}
 }
