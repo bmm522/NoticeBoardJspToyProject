@@ -51,6 +51,11 @@
 						</table>
 						
 					</div>
+					<%for(int i=1; i<10; i++){ %>
+					<td>
+					<a href="table?page=<%=i%>"><%=i%></a>
+					</td>
+					<%} %>
 					<a href="writer.jsp" class="btn btn-primary pull-right">글쓰기</a>
 				</div>
 			</div>

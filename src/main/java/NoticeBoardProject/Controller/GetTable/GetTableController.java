@@ -18,9 +18,10 @@ public class GetTableController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		int page = Integer.parseInt(request.getParameter("page"));
 		GetTableDAO dao = new GetTableDAO();
 		try {
-			request.setAttribute("table", dao.GetTable());
+			request.setAttribute("table", dao.GetTable(page));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -130,6 +130,20 @@ public abstract class NoticeBoardProjectDAO {
 		return ve;
 		
 	}
+	
+	public ResultSet preparedSQLGetTable(PreparedStatement pst, ResultSet rs, int startNumber, int endNumber) {
+		try {
+			pst.setInt(1, startNumber);
+			pst.setInt(2, endNumber);
+			return pst.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return rs;
+		
+	}
 	public void updateInDatabase(String title, String content, int id, Connection con, PreparedStatement pst) {
 		
 		try {

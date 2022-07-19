@@ -2,6 +2,7 @@ package NoticeBoardProject.DAO;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,18 +13,19 @@ import NoticeBoardProject.entity.TableEntity;
 
 public class GetTableDAO extends NoticeBoardProjectDAO{
 	
-	public List<TableEntity> GetTable() throws SQLException {
-		int pageNumber = getTotal();
-		String sql ="SELECT ID, TITLE, WRITER_ID, REGDATE, HIT FROM TABLELIST WHERE ROWNUM < 10 ORDER BY ID DESC";
+	public List<TableEntity> GetTable(int pageNumber) throws SQLException {
+		int startNumber = pageNumber + ((pageNumber-1)*10);
+		int endNumber = pageNumber*10;
+		String sql ="SELECT ID, TITLE, WRITER_ID, REGDATE, HIT FROM TABLELIST WHERE ROWNUM BETWEEN ? AND ? ORDER BY ID DESC";
 		Connection con = ConnectionDriver();
-		Statement st = null;
+		PreparedStatement pst = null;
 		ResultSet rs = null;
 		
 		
 		List<TableEntity> list = new ArrayList<>();
-		st = con.createStatement();
-		rs = st.executeQuery(sql);
-		return GetTableList(con, st, rs, list);
+		pst = con.prepareStatement(sql);
+		rs = preparedSQLGetTable(pst, rs, startNumber, endNumber);
+		return GetTableList(con, pst, rs, list);
 	}
 
 
@@ -48,12 +50,5 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 		return te;
 	}
 	
-	private int getTotal() throws SQLException {
-		String sql = "SELECT COUNT(ROWNUM) FROM TABLELIST";
-		Connection con = ConnectionDriver();
-		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery(sql);
-		return getTotalCountValue(con, st, rs);
-		
-	}
+	
 }
