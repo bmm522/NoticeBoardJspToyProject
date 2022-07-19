@@ -16,6 +16,8 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 	public List<TableEntity> GetTable(int pageNumber) throws SQLException {
 		int startNumber = pageNumber + ((pageNumber-1)*10);
 		int endNumber = pageNumber*10;
+		
+		int currentPage;
 		String sql ="SELECT ID, TITLE, WRITER_ID, REGDATE, HIT FROM TABLELIST WHERE ROWNUM BETWEEN ? AND ? ORDER BY ID DESC";
 		Connection con = ConnectionDriver();
 		PreparedStatement pst = null;
@@ -50,5 +52,9 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 		return te;
 	}
 	
+	private int currentPage() {
+		PageDAO pd = new PageDAO();
+		
+	}
 	
 }
