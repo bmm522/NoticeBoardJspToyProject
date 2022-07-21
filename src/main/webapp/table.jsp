@@ -12,7 +12,7 @@ if(totalvalue%10 != 0) {
 	pageNumber = totalvalue/10;	
 }
 
-
+int currentPage = 1;
 
 
 %>
@@ -36,6 +36,14 @@ if(totalvalue%10 != 0) {
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
 					<h2 class="heading-section">Table #01</h2>
+				</div>
+				<div>
+					<form method ="get" action = "table">
+						<input type = "text" placeholder ="검색어 입력" name="searchKeyword">
+						<input type = "hidden" name = "page" value = "<%=currentPage%>">
+						<input type = "submit" value = "검색">
+					</form>
+					
 				</div>
 			</div>
 			<div class="row">
@@ -66,11 +74,12 @@ if(totalvalue%10 != 0) {
 						</table>
 						
 					</div>
-					<%for(int i=1; i<=pageNumber; i++){ %>
+					<%for(currentPage = 1; currentPage<=pageNumber; currentPage++){ %>
 					<td>
-					<a href="table?page=<%=i%>"><%=i%></a>
+					<a href="table?page=<%=currentPage%>"><%=currentPage%></a>
 					</td>
 					<%} %>
+					
 					<a href="writer.jsp" class="btn btn-primary pull-right">글쓰기</a>
 				</div>
 			</div>

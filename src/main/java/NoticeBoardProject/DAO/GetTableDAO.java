@@ -9,14 +9,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import NoticeBoardProject.Controller.GetTable.SearchController;
 import NoticeBoardProject.entity.TableEntity;
 
 public class GetTableDAO extends NoticeBoardProjectDAO{
 	
-	public List<TableEntity> GetTable(int pageNumber) throws SQLException {
-		
-		
-		
+	public List<TableEntity> GetTable(int pageNumber, String searchKeyword) throws SQLException {
+	
+	
 		int startNumber = 1 +(pageNumber-1)*10;
 		int endNumber = pageNumber*10;
 		
@@ -24,7 +24,7 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 		
 		String sql ="SELECT B.RNUM, B.ID, B.TITLE, B.WRITER_ID, B.REGDATE, B.HIT FROM"
 				+ "(SELECT ROWNUM AS RNUM, A.ID, A.TITLE, A.WRITER_ID, A.REGDATE, A.HIT FROM "
-				+ "(SELECT * FROM TABLELIST ORDER BY REGDATE DESC) A WHERE ROWNUM <= ?)B WHERE RNUM >= ?";
+				+ "(SELECT * FROM (SELECT * FROM TABLELIST ORDER BY REGDATE DESC) C WHERE TITLE LIKE ?) A WHERE ROWNUM <= ?)B WHERE RNUM >= ?";
 		Connection con = ConnectionDriver();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -32,7 +32,7 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 		
 		List<TableEntity> list = new ArrayList<>();
 		pst = con.prepareStatement(sql);
-		rs = preparedSQLGetTable(pst, rs, startNumber, endNumber);
+		rs = preparedSQLGetTable(pst, rs, startNumber, endNumber, searchKeyword);
 		return GetTableList(con, pst, rs, list);
 	}
 

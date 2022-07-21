@@ -18,10 +18,17 @@ public class GetTableController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		String searchKeyword;
+		if(request.getParameter("searchKeyword") == null) {
+			searchKeyword = "";
+		} else {
+			searchKeyword = (String)request.getParameter("searchKeyword");
+		}
+		
 		int page = Integer.parseInt(request.getParameter("page"));
 		GetTableDAO dao = new GetTableDAO();
 		try {
-			request.setAttribute("table", dao.GetTable(page));
+			request.setAttribute("table", dao.GetTable(page,searchKeyword));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

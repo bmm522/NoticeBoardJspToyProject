@@ -29,7 +29,7 @@ public class UpdateController extends HttpServlet{
 	private void updateAftermovepage(PrintWriter out) {
 		out.println("<script>");
 		out.println("alert('글이 수정되었습니다.')");
-		out.println("location.href='table'");
+		out.println("location.href='table?page=1'");
 		out.println("</script>");
 		
 	}

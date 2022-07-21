@@ -131,10 +131,11 @@ public abstract class NoticeBoardProjectDAO {
 		
 	}
 	
-	public ResultSet preparedSQLGetTable(PreparedStatement pst, ResultSet rs, int startNumber, int endNumber) {
+	public ResultSet preparedSQLGetTable(PreparedStatement pst, ResultSet rs, int startNumber, int endNumber, String searchKeyword) {
 		try {
-			pst.setInt(1, endNumber);
-			pst.setInt(2, startNumber);
+			pst.setString(1, searchKeyword+"%");
+			pst.setInt(2, endNumber);
+			pst.setInt(3, startNumber);
 			return pst.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
