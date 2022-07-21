@@ -14,11 +14,17 @@ import NoticeBoardProject.entity.TableEntity;
 public class GetTableDAO extends NoticeBoardProjectDAO{
 	
 	public List<TableEntity> GetTable(int pageNumber) throws SQLException {
-		int startNumber = pageNumber + ((pageNumber-1)*10);
+		
+		
+		
+		int startNumber = 1 +(pageNumber-1)*10;
 		int endNumber = pageNumber*10;
 		
-		int currentPage;
-		String sql ="SELECT ID, TITLE, WRITER_ID, REGDATE, HIT FROM TABLELIST WHERE ROWNUM BETWEEN ? AND ? ORDER BY ID DESC";
+		
+		
+		String sql ="SELECT B.RNUM, B.ID, B.TITLE, B.WRITER_ID, B.REGDATE, B.HIT FROM"
+				+ "(SELECT ROWNUM AS RNUM, A.ID, A.TITLE, A.WRITER_ID, A.REGDATE, A.HIT FROM "
+				+ "(SELECT * FROM TABLELIST ORDER BY REGDATE DESC) A WHERE ROWNUM <= ?)B WHERE RNUM >= ?";
 		Connection con = ConnectionDriver();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -52,9 +58,5 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 		return te;
 	}
 	
-	private int currentPage() {
-		PageDAO pd = new PageDAO();
-		
-	}
-	
+
 }

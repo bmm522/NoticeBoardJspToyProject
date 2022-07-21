@@ -133,8 +133,8 @@ public abstract class NoticeBoardProjectDAO {
 	
 	public ResultSet preparedSQLGetTable(PreparedStatement pst, ResultSet rs, int startNumber, int endNumber) {
 		try {
-			pst.setInt(1, startNumber);
-			pst.setInt(2, endNumber);
+			pst.setInt(1, endNumber);
+			pst.setInt(2, startNumber);
 			return pst.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -173,19 +173,7 @@ public abstract class NoticeBoardProjectDAO {
 		
 	}
 	
-	public int getTotalCountValue(Connection con, Statement st, ResultSet rs){
-		int totalDataCount = 0;
-		try {
-			rs.next();
-			return totalDataCount = rs.getInt("COUNT(ROWNUM)");
-		} catch (SQLException e) {
-			System.out.println("getTotalCountValue¿À·ù");
-		} finally {
-			JdbcClose(con, st, rs);
-		}
-		return totalDataCount;
-		
-	}
+	
 		
 	
 	

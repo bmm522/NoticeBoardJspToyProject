@@ -1,6 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import = "NoticeBoardProject.DAO.PageDAO" %>
+<%
+PageDAO pd = new PageDAO();
+int totalvalue = pd.getTotal();
+int pageNumber = 0;
+if(totalvalue%10 != 0) {
+	pageNumber = (totalvalue/10)+1;
+} else {
+	pageNumber = totalvalue/10;	
+}
+
+
+
+
+%>
 <!DOCTYPE html>
 <html>
  <head>
@@ -51,7 +66,7 @@
 						</table>
 						
 					</div>
-					<%for(int i=1; i<10; i++){ %>
+					<%for(int i=1; i<=pageNumber; i++){ %>
 					<td>
 					<a href="table?page=<%=i%>"><%=i%></a>
 					</td>

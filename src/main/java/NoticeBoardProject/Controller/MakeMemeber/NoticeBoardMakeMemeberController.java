@@ -79,7 +79,7 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 				session.setAttribute("userId", userId);
 				out.println("<script>");
 				out.println("alert('회원가입 성공')");
-				out.println("location.href='table'");
+				out.println("location.href='table?page=1'");
 				out.println("</script>");
 		
 		}
