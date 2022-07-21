@@ -14,6 +14,8 @@ if(totalvalue%10 != 0) {
 
 int currentPage = 1;
 
+String searchKeyword = (String)request.getAttribute("searchKeyword");
+
 
 %>
 <!DOCTYPE html>
@@ -38,11 +40,11 @@ int currentPage = 1;
 					<h2 class="heading-section">Table #01</h2>
 				</div>
 				<div>
-					<form method ="get" action = "table">
+					<form method ="get" action = "search">
 						<input type = "text" placeholder ="검색어 입력" name="searchKeyword">
 						<input type = "hidden" name = "page" value = "<%=currentPage%>">
 						<input type = "submit" value = "검색">
-					</form>
+					
 					
 				</div>
 			</div>
@@ -76,10 +78,10 @@ int currentPage = 1;
 					</div>
 					<%for(currentPage = 1; currentPage<=pageNumber; currentPage++){ %>
 					<td>
-					<a href="table?page=<%=currentPage%>"><%=currentPage%></a>
+					<a href="search?page=<%=currentPage%>&searchKeyword=<%=searchKeyword%>"><%=currentPage%></a>
 					</td>
 					<%} %>
-					
+					</form>
 					<a href="writer.jsp" class="btn btn-primary pull-right">글쓰기</a>
 				</div>
 			</div>

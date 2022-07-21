@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import NoticeBoardProject.Controller.GetTable.SearchController;
 import NoticeBoardProject.entity.TableEntity;
 
 public class GetTableDAO extends NoticeBoardProjectDAO{
