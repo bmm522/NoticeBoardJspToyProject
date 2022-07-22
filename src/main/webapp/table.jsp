@@ -44,7 +44,7 @@ String searchKeyword = (String)request.getAttribute("searchKeyword");
 						<input type = "text" placeholder ="검색어 입력" name="searchKeyword">
 						<input type = "hidden" name = "page" value = "<%=currentPage%>">
 						<input type = "submit" value = "검색">
-					
+					</form>
 					
 				</div>
 			</div>
@@ -81,7 +81,7 @@ String searchKeyword = (String)request.getAttribute("searchKeyword");
 					<a href="search?page=<%=currentPage%>&searchKeyword=<%=searchKeyword%>"><%=currentPage%></a>
 					</td>
 					<%} %>
-					</form>
+					
 					<a href="writer.jsp" class="btn btn-primary pull-right">글쓰기</a>
 				</div>
 			</div>

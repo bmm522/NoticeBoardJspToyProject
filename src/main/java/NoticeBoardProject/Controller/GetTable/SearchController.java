@@ -18,7 +18,7 @@ public class SearchController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String searchKeyword;
-		if (request.getParameter("searchKeyword").equals("")/* == null */) {
+		if (request.getParameter("searchKeyword").equals("null")/* == null*/ ) {
 			searchKeyword = "";
 		} else {
 			searchKeyword = (String)request.getParameter("searchKeyword");

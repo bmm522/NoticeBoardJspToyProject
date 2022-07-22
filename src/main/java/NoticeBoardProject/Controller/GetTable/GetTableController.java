@@ -17,10 +17,11 @@ public class GetTableController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchKeyword;
-		if(request.getParameter("searchKeyword") == null) {
-			searchKeyword = "";
-		} else {
+		if(request.getParameter("searchKeyword") != "null") {
 			searchKeyword = (String)request.getParameter("searchKeyword");
+		} else {
+			searchKeyword = "";
+			
 		}
 		
 		int page = Integer.parseInt(request.getParameter("page"));
