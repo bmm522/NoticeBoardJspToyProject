@@ -22,10 +22,6 @@ public class NoticeBoardLoginController extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		//HttpSession session = null;
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		//인코딩 설정
 		LoginAfterMovePage(request.getParameter("User_Id"), request.getParameter("User_Pwd"), response, request);
 		}
 		

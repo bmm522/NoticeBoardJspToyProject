@@ -15,9 +15,7 @@ import NoticeBoardProject.DAO.DeleteDAO;
 public class DeleteController extends HttpServlet{
 	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		DeleteDAO dd = new DeleteDAO();
 		dd.deletePage(Integer.parseInt(request.getParameter("id")));
 		movePage(response.getWriter());

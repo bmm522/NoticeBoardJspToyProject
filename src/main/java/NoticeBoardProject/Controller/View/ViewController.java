@@ -15,8 +15,7 @@ public class ViewController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+	
 		ViewDAO vd = new ViewDAO();
 		int id = Integer.parseInt(request.getParameter("id"));
 		request.setAttribute("view", vd.GetView(id));

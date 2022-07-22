@@ -16,8 +16,7 @@ public class UpdateController extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+	
 		UpdateDAO ud = new UpdateDAO();
 		ud.updateWrite(request.getParameter("title"),
 				request.getParameter("content"),

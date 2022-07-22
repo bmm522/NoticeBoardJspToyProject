@@ -20,9 +20,6 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-				
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
 
 		MakeMemberAction(request.getParameter("user_ID"), request.getParameter("user_PW"), 
 				request.getParameter("user_Name"), request.getParameter("user_Phonenum"),
