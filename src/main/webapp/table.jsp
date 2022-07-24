@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import = "NoticeBoardProject.DAO.PageDAO" %>
+
 <%
-PageDAO pd = new PageDAO();
-int totalvalue = pd.getTotal();
+int totalvalue = (int)request.getAttribute("totalvalue");
+
 int pageNumber = 0;
 if(totalvalue%10 != 0) {
 	pageNumber = (totalvalue/10)+1;

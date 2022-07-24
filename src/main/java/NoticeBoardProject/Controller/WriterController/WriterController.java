@@ -30,7 +30,7 @@ public class WriterController extends HttpServlet{
 	private void ReturnPage(PrintWriter out) {
 		out.println("<script>");
 		out.println("alert('글이 생성되었습니다.')");
-		out.println("location.href='table?page=1'");
+		out.println("location.href='search?page=1&searchKeyword=null'");
 		out.println("</script>");
 		
 		

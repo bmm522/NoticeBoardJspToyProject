@@ -22,16 +22,16 @@ public class NoticeBoardLoginController extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		LoginAfterMovePage(request.getParameter("User_Id"), request.getParameter("User_Pwd"), response, request);
+		loginAfterMovePage(request.getParameter("User_Id"), request.getParameter("User_Pwd"), response, request);
 		}
 		
 		
 	
-	protected void LoginAfterMovePage(String userId, String userPwd, HttpServletResponse response, HttpServletRequest request)
+	protected void loginAfterMovePage(String userId, String userPwd, HttpServletResponse response, HttpServletRequest request)
 			throws IOException {
-		NoticeBoardProjectDAO noticeBoardDaoImpl = new LoginDAO();
-		LoginAfterMovePageSwitch (((LoginDAO) noticeBoardDaoImpl)
-				.GetTokenOfLoginCheck(userId, userPwd), 
+		NoticeBoardProjectDAO logindao = new LoginDAO();
+		loginAfterMovePageSwitch (((LoginDAO) logindao)
+				.getTokenOfLoginCheck(userId, userPwd), 
 				response.getWriter(),
 				request.getSession(), 
 				userId);
@@ -39,7 +39,7 @@ public class NoticeBoardLoginController extends HttpServlet{
 	
 	
 
-	protected void LoginAfterMovePageSwitch(Token token, PrintWriter out, HttpSession session, String userId) {
+	protected void loginAfterMovePageSwitch(Token token, PrintWriter out, HttpSession session, String userId) {
 			
 			switch(token) {
 				case LOGINSUCCESS:

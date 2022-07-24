@@ -13,6 +13,10 @@ import NoticeBoardProject.entity.TableEntity;
 
 public class GetTableDAO extends NoticeBoardProjectDAO{
 	
+	String sql ="SELECT B.RNUM, B.ID, B.TITLE, B.WRITER_ID, B.REGDATE, B.HIT FROM"
+			+ "(SELECT ROWNUM AS RNUM, A.ID, A.TITLE, A.WRITER_ID, A.REGDATE, A.HIT FROM "
+			+ "(SELECT * FROM (SELECT * FROM TABLELIST ORDER BY REGDATE DESC) C WHERE TITLE LIKE ? AND PUB = 1) A WHERE ROWNUM <= ?)B"
+			+ " WHERE RNUM >= ?";
 	public List<TableEntity> GetTable(int pageNumber, String searchKeyword) throws SQLException {
 	
 	
@@ -21,9 +25,7 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 		
 		
 		
-		String sql ="SELECT B.RNUM, B.ID, B.TITLE, B.WRITER_ID, B.REGDATE, B.HIT FROM"
-				+ "(SELECT ROWNUM AS RNUM, A.ID, A.TITLE, A.WRITER_ID, A.REGDATE, A.HIT FROM "
-				+ "(SELECT * FROM (SELECT * FROM TABLELIST ORDER BY REGDATE DESC) C WHERE TITLE LIKE ?) A WHERE ROWNUM <= ?)B WHERE RNUM >= ?";
+		
 		Connection con = ConnectionDriver();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -57,5 +59,30 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 		return te;
 	}
 	
+	public int getTotal(String searchKeyword) throws SQLException {
+		String countsql = "SELECT COUNT(ROWNUM) FROM (SELECT * FROM TABLELIST WHERE TITLE LIKE ? )A";
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		Connection con = ConnectionDriver();
+		pst = con.prepareStatement(countsql);
+		rs = getTotalSQLGetTable(pst, rs, searchKeyword);
+		return getTotalCountValue(con, pst, rs);
+		
+	}
+	
+	public int getTotalCountValue(Connection con, PreparedStatement pst, ResultSet rs){
+		int totalDataCount = 0;
+		try {
+			rs.next();
+			return totalDataCount = rs.getInt("COUNT(ROWNUM)");
+		} catch (SQLException e) {
+			System.out.println("getTotalCountValue¿À·ù");
+		} finally {
+			JdbcClose(con, pst, rs);
+		}
+		return totalDataCount;
+		
+	}
 
 }

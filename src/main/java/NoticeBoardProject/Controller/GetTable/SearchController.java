@@ -31,6 +31,14 @@ public class SearchController extends HttpServlet{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		try {
+			int totalvalue = dao.getTotal(searchKeyword);
+			request.setAttribute("totalvalue", totalvalue);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		request.setAttribute("searchKeyword", searchKeyword);
 		request.getRequestDispatcher("/table.jsp").forward(request, response);
 	}

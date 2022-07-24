@@ -57,13 +57,13 @@ public abstract class NoticeBoardProjectDAO {
 	}
 	
 	
-	public PreparedStatement GetLoginPst(PreparedStatement pst,String sql, String userId, String userPwd) throws SQLException {
-		SetStringOfGetLoginPst(pst, userId, userPwd);
+	public PreparedStatement getLoginPst(PreparedStatement pst,String sql, String userId, String userPwd) throws SQLException {
+		setStringOfGetLoginPst(pst, userId, userPwd);
 		return pst;
 		
 	}
 	
-	public void SetStringOfGetLoginPst(PreparedStatement pst, String userId, String userPwd){
+	public void setStringOfGetLoginPst(PreparedStatement pst, String userId, String userPwd){
 		try {
 			pst.setString(1, userId);
 			pst.setString(2, userPwd);
@@ -145,6 +145,20 @@ public abstract class NoticeBoardProjectDAO {
 		return rs;
 		
 	}
+	public ResultSet getTotalSQLGetTable(PreparedStatement pst, ResultSet rs, String searchKeyword) {
+		try {
+			pst.setString(1, searchKeyword+"%");
+			return pst.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return rs;
+		
+	}
+	
+	
 	public void updateInDatabase(String title, String content, int id, Connection con, PreparedStatement pst) {
 		
 		try {

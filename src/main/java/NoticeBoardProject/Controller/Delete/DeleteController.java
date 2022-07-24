@@ -24,7 +24,7 @@ public class DeleteController extends HttpServlet{
 	public void movePage(PrintWriter out) {
 		out.println("<script>");
 		out.println("alert('글이 삭제되었습니다.')");
-		out.println("location.href='table'");
+		out.println("location.href='search?page=1&searchKeyword=null'");
 		out.println("</script>");
 		
 	}
