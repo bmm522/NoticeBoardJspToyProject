@@ -33,13 +33,13 @@ public abstract class NoticeBoardProjectDAO {
 		return con;
 	}
 	
-	public void AddMember(PreparedStatement pst, String sql,String userId, String userPwd, 
+	public void addMember(PreparedStatement pst, String sql,String userId, String userPwd, 
 			String userName, String userPhoneNum, String userEmail) {
-		SetStringOfAddMember(pst,sql,userId,userPwd,userName,userPhoneNum,userEmail);
+		setStringOfAddMember(pst,sql,userId,userPwd,userName,userPhoneNum,userEmail);
 		
 	}
 	
-	private void SetStringOfAddMember(PreparedStatement pst, String sql,String userId, 
+	private void setStringOfAddMember(PreparedStatement pst, String sql,String userId, 
 			String userPwd, String userName, String userPhoneNum, String userEmail) {
 		LoginEntity loginEntity = new LoginEntity
 				(userId, userPwd, userName, userPhoneNum, userEmail);
@@ -52,7 +52,7 @@ public abstract class NoticeBoardProjectDAO {
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("SetStringOfAddMember오류");
+			System.out.println("setStringOfAddMember오류");
 		}
 	}
 	
@@ -131,32 +131,8 @@ public abstract class NoticeBoardProjectDAO {
 		
 	}
 	
-	public ResultSet preparedSQLGetTable(PreparedStatement pst, ResultSet rs, int startNumber, int endNumber, String searchKeyword) {
-		try {
-			pst.setString(1, searchKeyword+"%");
-			pst.setInt(2, endNumber);
-			pst.setInt(3, startNumber);
-			return pst.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return rs;
-		
-	}
-	public ResultSet getTotalSQLGetTable(PreparedStatement pst, ResultSet rs, String searchKeyword) {
-		try {
-			pst.setString(1, searchKeyword+"%");
-			return pst.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return rs;
-		
-	}
+
+
 	
 	
 	public void updateInDatabase(String title, String content, int id, Connection con, PreparedStatement pst) {

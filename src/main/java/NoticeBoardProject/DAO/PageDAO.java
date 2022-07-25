@@ -1,6 +1,7 @@
 package NoticeBoardProject.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,16 +9,24 @@ import java.sql.Statement;
 public class PageDAO extends NoticeBoardProjectDAO{
 
 	
-	public int getTotal() throws SQLException {
-		String sql = "SELECT COUNT(ROWNUM) FROM TABLELIST";
-		Connection con = ConnectionDriver();
-		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery(sql);
-		return getTotalCountValue(con, st, rs);
+	public int getTotal(String searchKeyword) throws SQLException {
+		String countsql = "SELECT COUNT(ROWNUM) FROM (SELECT * FROM TABLELIST WHERE TITLE LIKE ? )A";
+		PreparedStatement pst = null;
+		ResultSet rs = null;
 		
+		Connection con = ConnectionDriver();
+		pst = con.prepareStatement(countsql);
+		rs = getTotalSQLGetTable(pst, rs, searchKeyword);
+		return getTotalCountValue(con, pst, rs);
 	}
 	
-	public int getTotalCountValue(Connection con, Statement st, ResultSet rs){
+	private ResultSet getTotalSQLGetTable(PreparedStatement pst, ResultSet rs, String searchKeyword)
+			throws SQLException{
+			pst.setString(1, searchKeyword+"%");
+			return pst.executeQuery();
+	}
+		
+	private int getTotalCountValue(Connection con, PreparedStatement pst, ResultSet rs){
 		int totalDataCount = 0;
 		try {
 			rs.next();
@@ -25,7 +34,7 @@ public class PageDAO extends NoticeBoardProjectDAO{
 		} catch (SQLException e) {
 			System.out.println("getTotalCountValue¿À·ù");
 		} finally {
-			JdbcClose(con, st, rs);
+			JdbcClose(con, pst, rs);
 		}
 		return totalDataCount;
 		

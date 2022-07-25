@@ -19,24 +19,31 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 			+ " WHERE RNUM >= ?";
 	public List<TableEntity> GetTable(int pageNumber, String searchKeyword) throws SQLException {
 	
-	
 		int startNumber = 1 +(pageNumber-1)*10;
 		int endNumber = pageNumber*10;
-		
-		
-		
 		
 		Connection con = ConnectionDriver();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		
-		
+			
 		List<TableEntity> list = new ArrayList<>();
 		pst = con.prepareStatement(sql);
 		rs = preparedSQLGetTable(pst, rs, startNumber, endNumber, searchKeyword);
 		return GetTableList(con, pst, rs, list);
 	}
-
+	
+	private ResultSet preparedSQLGetTable(PreparedStatement pst, ResultSet rs, int startNumber, int endNumber, String searchKeyword) {
+		try {
+			pst.setString(1, searchKeyword+"%");
+			pst.setInt(2, endNumber);
+			pst.setInt(3, startNumber);
+			return pst.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+		
+	}
 
 	private List<TableEntity> GetTableList(Connection con, Statement st, ResultSet rs, List<TableEntity> list) {
 		try {
@@ -59,30 +66,8 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 		return te;
 	}
 	
-	public int getTotal(String searchKeyword) throws SQLException {
-		String countsql = "SELECT COUNT(ROWNUM) FROM (SELECT * FROM TABLELIST WHERE TITLE LIKE ? )A";
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-		
-		Connection con = ConnectionDriver();
-		pst = con.prepareStatement(countsql);
-		rs = getTotalSQLGetTable(pst, rs, searchKeyword);
-		return getTotalCountValue(con, pst, rs);
-		
-	}
 	
-	public int getTotalCountValue(Connection con, PreparedStatement pst, ResultSet rs){
-		int totalDataCount = 0;
-		try {
-			rs.next();
-			return totalDataCount = rs.getInt("COUNT(ROWNUM)");
-		} catch (SQLException e) {
-			System.out.println("getTotalCountValue¿À·ù");
-		} finally {
-			JdbcClose(con, pst, rs);
-		}
-		return totalDataCount;
-		
-	}
+	
+
 
 }

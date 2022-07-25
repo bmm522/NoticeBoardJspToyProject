@@ -21,13 +21,13 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 
-		MakeMemberAction(request.getParameter("user_ID"), request.getParameter("user_PW"), 
+		makeMemberAction(request.getParameter("user_ID"), request.getParameter("user_PW"), 
 				request.getParameter("user_Name"), request.getParameter("user_Phonenum"),
 				request.getParameter("user_Email"), response.getWriter(), request);
 	}
 
 
-	private void MakeMemberAction(String userId, String userPwd, String userName, String userPhonenum,
+	private void makeMemberAction(String userId, String userPwd, String userName, String userPhonenum,
 			String userEmail, PrintWriter out, HttpServletRequest request) {
 	
 		if (userId == "" || userPwd == "" || userName == "" 
@@ -38,7 +38,7 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 			out.println("</script>");
 			
 		}	else { 
-			MakeMemberActionLogic(userId, 
+			makeMemberActionLogic(userId, 
 					userPwd, 
 					userName, 
 					userPhonenum,
@@ -48,12 +48,12 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 		}
 		
 	}
-	private void MakeMemberActionLogic(String userId, String userPwd, String userName, String userPhonenum,
+	private void makeMemberActionLogic(String userId, String userPwd, String userName, String userPhonenum,
 			String userEmail, PrintWriter out,  HttpServletRequest request) {
 		
 		MakeMemberDAO nd = new MakeMemberDAO();
 		try {
-			MakeMemberActionLogiccheck(nd.GetTokenOfMakeMember
+			makeMemberActionLogiccheck(nd.getTokenOfMakeMember
 					(userId, userPwd, userName, userPhonenum, userEmail), 
 					out, 
 					request.getSession(), userId);
@@ -64,7 +64,7 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 	}
 
 
-	private void MakeMemberActionLogiccheck(Token token, PrintWriter out, HttpSession session, String userId) {
+	private void makeMemberActionLogiccheck(Token token, PrintWriter out, HttpSession session, String userId) {
 		switch(token) {
 			case MAKEMEMBERFAIL:
 				out.println("<script>");
