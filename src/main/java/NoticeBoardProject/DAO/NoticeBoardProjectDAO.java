@@ -89,52 +89,7 @@ public abstract class NoticeBoardProjectDAO {
 		}
 		
 	}
-	
-	public List<ViewEntity> GetViewFromDatabase(Connection con, PreparedStatement pst, ResultSet rs, String sql, int id){
-		
-		try {
-			pst=con.prepareStatement(sql);
-			pst.setInt(1, id);
-			rs=pst.executeQuery();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("GetViewFromDatabase오류");
-		}
-		return GetViewFromDataBaseEntity(con, pst, rs);
-	}
-	
-	public List<ViewEntity> GetViewFromDataBaseEntity(Connection con, PreparedStatement pst, ResultSet rs){
-		List<ViewEntity> list = new ArrayList<>();
-		try {
-			rs.next();
-			list.add(GetViewEntity(
-					rs.getInt("ID"),
-					rs.getString("TITLE"), 
-					rs.getString("WRITER_ID"),
-					rs.getString("CONTENT"),
-					rs.getDate("REGDATE")));
-			JdbcClose(con, pst, rs);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("GetViewFromDataBaseEntity오류");
-		}
-		return list;
-		
-	}
-	
-	
-	
-	public ViewEntity GetViewEntity(int id, String title, String writer_id, String content, Date regdate) {
-		ViewEntity ve = new ViewEntity(id, title, writer_id, content, regdate);
-		return ve;
-		
-	}
-	
 
-
-	
-	
 	public void updateInDatabase(String title, String content, int id, Connection con, PreparedStatement pst) {
 		
 		try {
@@ -163,9 +118,6 @@ public abstract class NoticeBoardProjectDAO {
 		}
 		
 	}
-	
-	
-		
 	
 	
 	public void JdbcClose(Connection con, PreparedStatement pst) {

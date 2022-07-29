@@ -17,7 +17,7 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 			+ "(SELECT ROWNUM AS RNUM, A.ID, A.TITLE, A.WRITER_ID, A.REGDATE, A.HIT FROM "
 			+ "(SELECT * FROM (SELECT * FROM TABLELIST ORDER BY REGDATE DESC) C WHERE TITLE LIKE ? AND PUB = 1) A WHERE ROWNUM <= ?)B"
 			+ " WHERE RNUM >= ?";
-	public List<TableEntity> GetTable(int pageNumber, String searchKeyword) throws SQLException {
+	public List<TableEntity> getTable(int pageNumber, String searchKeyword) throws SQLException {
 	
 		int startNumber = 1 +(pageNumber-1)*10;
 		int endNumber = pageNumber*10;
@@ -29,7 +29,7 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 		List<TableEntity> list = new ArrayList<>();
 		pst = con.prepareStatement(sql);
 		rs = preparedSQLGetTable(pst, rs, startNumber, endNumber, searchKeyword);
-		return GetTableList(con, pst, rs, list);
+		return getTableList(con, pst, rs, list);
 	}
 	
 	private ResultSet preparedSQLGetTable(PreparedStatement pst, ResultSet rs, int startNumber, int endNumber, String searchKeyword) {
@@ -45,10 +45,10 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 		
 	}
 
-	private List<TableEntity> GetTableList(Connection con, Statement st, ResultSet rs, List<TableEntity> list) {
+	private List<TableEntity> getTableList(Connection con, Statement st, ResultSet rs, List<TableEntity> list) {
 		try {
 			while(rs.next()) {
-				list.add(GetTableListEntity(rs.getInt("ID"), rs.getString("TITLE"),
+				list.add(getTableListEntity(rs.getInt("ID"), rs.getString("TITLE"),
 						rs.getString("WRITER_ID"), rs.getDate("REGDATE"), rs.getInt("HIT")));
 			}
 		} catch(SQLException e) {
@@ -60,13 +60,43 @@ public class GetTableDAO extends NoticeBoardProjectDAO{
 	}
 
 
-	private TableEntity GetTableListEntity(int id, String title, 
+	private TableEntity getTableListEntity(int id, String title, 
 			String writer_id, Date regdate, int hit) {
 		TableEntity te = new TableEntity(id, title, writer_id, regdate, hit);
 		return te;
 	}
 	
+
+	public int getTotal(String searchKeyword) throws SQLException {
+		String countsql = "SELECT COUNT(ROWNUM) FROM (SELECT * FROM TABLELIST WHERE TITLE LIKE ? )A";
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		Connection con = ConnectionDriver();
+		pst = con.prepareStatement(countsql);
+		rs = getTotalSQLGetTable(pst, rs, searchKeyword);
+		return getTotalCountValue(con, pst, rs);
+	}
 	
+	private ResultSet getTotalSQLGetTable(PreparedStatement pst, ResultSet rs, String searchKeyword)
+			throws SQLException{
+			pst.setString(1, searchKeyword+"%");
+			return pst.executeQuery();
+	}
+		
+	private int getTotalCountValue(Connection con, PreparedStatement pst, ResultSet rs){
+		int totalDataCount = 0;
+		try {
+			rs.next();
+			return totalDataCount = rs.getInt("COUNT(ROWNUM)");
+		} catch (SQLException e) {
+			System.out.println("getTotalCountValue¿À·ù");
+		} finally {
+			JdbcClose(con, pst, rs);
+		}
+		return totalDataCount;
+		
+	}
 	
 
 

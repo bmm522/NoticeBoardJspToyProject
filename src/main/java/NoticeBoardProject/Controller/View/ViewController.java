@@ -14,11 +14,12 @@ import NoticeBoardProject.DAO.ViewDAO;
 public class ViewController extends HttpServlet{
 	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 	
 		ViewDAO vd = new ViewDAO();
 		int id = Integer.parseInt(request.getParameter("id"));
-		request.setAttribute("view", vd.GetView(id));
+		request.setAttribute("view", vd.getView(id));
 		request.getRequestDispatcher("/view.jsp").forward(request, response);
 		
 	}

@@ -27,7 +27,7 @@ public class SearchController extends HttpServlet{
 		int page = Integer.parseInt(request.getParameter("page"));
 		GetTableDAO dao = new GetTableDAO();
 		try {
-			request.setAttribute("table", dao.GetTable(page,searchKeyword));
+			request.setAttribute("table", dao.getTable(page,searchKeyword));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
