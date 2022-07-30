@@ -90,22 +90,7 @@ public abstract class NoticeBoardProjectDAO {
 		
 	}
 
-	public void updateInDatabase(String title, String content, int id, Connection con, PreparedStatement pst) {
-		
-		try {
-			pst.setString(1, title);
-			pst.setString(2, content);
-			pst.setInt(3, id);
-			pst.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("updateInDAtabase¿À·ù");
-			
-		} finally {
-			JdbcClose(con, pst);
-		}
-		
-	}
+	
 	
 	public void deleteInDatabase(Connection con, PreparedStatement pst, int id) {
 		try {
