@@ -21,11 +21,11 @@ public class UpdateController extends HttpServlet{
 		ud.updateWrite(request.getParameter("title"),
 				request.getParameter("content"),
 				Integer.parseInt(request.getParameter("id")));
-		updateAftermovepage(response.getWriter());
+		updateAfterMovePage(response.getWriter());
 		
 	}
 	
-	private void updateAftermovepage(PrintWriter out) {
+	private void updateAfterMovePage(PrintWriter out) {
 		out.println("<script>");
 		out.println("alert('글이 수정되었습니다.')");
 		out.println("location.href='search?page=1&searchKeyword=null'");
