@@ -61,5 +61,18 @@ public class ViewDAO extends NoticeBoardProjectDAO{
 		return ve;
 		
 	}
+
+
+	public void plusHit(int id) {
+		String sql = "UPDATE TABLELIST SET HIT = HIT + 1 WHERE ID = ?";
+		Connection con = ConnectionDriver();
+		try {
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setInt(1, id);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("plusHit¿À·ù");
+		}	
+	}
 	
 }
