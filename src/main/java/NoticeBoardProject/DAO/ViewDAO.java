@@ -70,6 +70,7 @@ public class ViewDAO extends NoticeBoardProjectDAO{
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setInt(1, id);
 			pst.executeUpdate();
+			JdbcClose(con,pst);
 		} catch (SQLException e) {
 			System.out.println("plusHit¿À·ù");
 		}	
