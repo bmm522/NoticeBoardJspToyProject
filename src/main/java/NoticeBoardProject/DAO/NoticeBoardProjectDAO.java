@@ -33,28 +33,9 @@ public abstract class NoticeBoardProjectDAO {
 		return con;
 	}
 	
-	public void addMember(PreparedStatement pst, String sql,String userId, String userPwd, 
-			String userName, String userPhoneNum, String userEmail) {
-		setStringOfAddMember(pst,sql,userId,userPwd,userName,userPhoneNum,userEmail);
-		
-	}
 	
-	private void setStringOfAddMember(PreparedStatement pst, String sql,String userId, 
-			String userPwd, String userName, String userPhoneNum, String userEmail) {
-		LoginEntity loginEntity = new LoginEntity
-				(userId, userPwd, userName, userPhoneNum, userEmail);
-		try {
-			pst.setString(1, loginEntity.getUserId());
-			pst.setString(2, loginEntity.getUserPwd());
-			pst.setString(3, loginEntity.getUserName());
-			pst.setString(4, loginEntity.getPhoneNum());
-			pst.setString(5, loginEntity.getEmail());
-			pst.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("setStringOfAddMember¿À·ù");
-		}
-	}
+	
+	
 	
 	
 	public PreparedStatement getLoginPst(PreparedStatement pst,String sql, String userId, String userPwd) throws SQLException {
