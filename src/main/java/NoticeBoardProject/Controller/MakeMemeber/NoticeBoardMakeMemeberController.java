@@ -13,12 +13,12 @@ import javax.servlet.http.HttpSession;
 
 import NoticeBoardProject.DAO.MakeMemberDAO;
 import NoticeBoardProject.DAO.Token.Token;
-import codeEncryption.oneWay.codeObject.CodeObject;
+import codeEncryption.oneWay.codeObject.CodeEntity;
 import codeEncryption.oneWay.main.CodeEncryptionOfOneWay;
 
 @WebServlet("/NoticeBoardMakeMemberController")
 public class NoticeBoardMakeMemeberController extends HttpServlet{
-	ArrayList<CodeObject> hashCodeArr = new ArrayList<CodeObject>();
+	ArrayList<CodeEntity> hashCodeArr = new ArrayList<CodeEntity>();
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
@@ -29,8 +29,8 @@ public class NoticeBoardMakeMemeberController extends HttpServlet{
 				request.getParameter("user_Email"), response.getWriter(), request, hashCodeArr.get(0).getSaltCode());
 	}
 
-	private ArrayList<CodeObject> changePwdToHashCode(String userId, String userPwd) {
-		ArrayList<CodeObject> arr = new ArrayList<CodeObject>();
+	private ArrayList<CodeEntity> changePwdToHashCode(String userId, String userPwd) {
+		ArrayList<CodeEntity> arr = new ArrayList<CodeEntity>();
 		CodeEncryptionOfOneWay cw = new CodeEncryptionOfOneWay(userId, userPwd);
 		arr = cw.getEncryptingCode();
 		return arr;
