@@ -33,8 +33,7 @@ public class LoginDAO extends NoticeBoardProjectDAO{
 
 	private boolean checkPwd(Connection con, PreparedStatement pst, ResultSet rs, String userId, String userPwd) {
 		CheckMachingCode cmc = new CheckMachingCode();
-		String salt = getSalt(con, pst, rs, userId);
-		return cmc.checkMachingCode(userId, userPwd, salt, getHashCode(con,pst,rs,userId));
+		return cmc.checkMachingCode(userId, userPwd, getSalt(con, pst, rs, userId), getHashCode(con,pst,rs,userId));
 		
 	}
 
